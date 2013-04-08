@@ -33,9 +33,10 @@ class StoreExercise {
 			
 			
 			ContentValues values = new ContentValues();
-			System.out.println(data[0] + ", " + data[1]);
+			System.out.println(data[0] + ", " + data[1] + ", " + data[2]);
 			values.put(DbHelper.C_NAME, data[0]);
 			values.put(DbHelper.C_CATEGORY, data[1]);
+			values.put(DbHelper.C_DESCRIPTION, data[2]);
 
 			db.insertWithOnConflict(DbHelper.TABLE, null, values,
 					SQLiteDatabase.CONFLICT_REPLACE);

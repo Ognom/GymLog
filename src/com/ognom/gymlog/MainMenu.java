@@ -62,7 +62,7 @@ public class MainMenu extends Activity implements OnClickListener{
 			try{
 				Class<?> tempClass = Class.forName("com.ognom.gymlog.NewExercise");
 				Intent tempIntent = new Intent(this, tempClass);
-				System.out.println("test");
+				//System.out.println("test");
 				startActivity(tempIntent);
 			}
 			catch(Exception e){

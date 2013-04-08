@@ -1,5 +1,7 @@
 package com.ognom.gymlog;
 
+import com.ognom.gymlog.database.DatabaseController;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ public class NewExercise extends Activity implements OnClickListener{
 	Button addExercise;
 	EditText exerciseName, description;
 	AutoCompleteTextView category;
+	DatabaseController dbC;
 	
 	//TODO: Dummy, replace with actual exercises from the database
 	String[] exerciseSuggestions = {""};
@@ -38,13 +41,18 @@ public class NewExercise extends Activity implements OnClickListener{
 		category.setAdapter(adapter);
 		
 		addExercise.setOnClickListener(this);
+		dbC = DatabaseController.initialize(this);
 	}
 
 	@Override
 	public void onClick(View v) {
-		
+		dbC.test();
 		// TODO: addExercise is the only element able to call this function. Add the exercise in the database with corresponding elements.
-		
+		String exercise = (exerciseName.getText() + "," + category.getText() + "," + description.getText());
+		if(dbC.storeExercise(exercise))
+			System.out.println("Successfully added exercise");
+		else
+			System.out.println("Failed adding exercise");
 	}
 
 }

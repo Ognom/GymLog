@@ -31,9 +31,9 @@
         android:id="@+id/eTDescription"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.16"
+        android:layout_weight="0.11"
         android:ems="10"
-        android:inputType="textMultiLine"
-        android:hint="@string/description" />
+        android:hint="@string/description"
+        android:inputType="textMultiLine" />
 
 </LinearLayout>
