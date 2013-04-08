@@ -3,9 +3,11 @@ package com.ognom.gymlog.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 class StoreExercise {
 
+	private static final String TAG = "com.ognom.gymlog.database.DatabaseController.storeExercise()";
 	//private DbHelper helper;
 	//private SQLiteDatabase db;
 
@@ -25,12 +27,17 @@ class StoreExercise {
 			Cursor cursor = db.rawQuery(sql, new String []{}); //cursor is set to point before the first entry of the query.
 			cursor.moveToLast(); //cursor points at the last last row unless empty.
 			int t = cursor.getColumnIndex(DbHelper.C_NAME); //t = index of name column (0-based).
-			
+
 			//System.out.println(cursor.getCount());
-			
-			while(cursor.getString(t).compareTo(data[0]) < 0 ) //if < 0, move the cursor one step and compare again. Once equal to zero or > 0 we're at the correct position.
-				cursor.moveToPrevious();
-			
+
+			while(cursor.getString(t).compareTo(data[0]) < 0 ){ //if < 0 the word is alphabetically lower than where the cursor is pointing at.
+				if(cursor.getString(t).compareTo(data[0]) == 0){ //if == 0, we have a duplicate, break.
+					Log.d(TAG, "Duplicate found");
+					break;
+				}
+				else
+					cursor.moveToPrevious(); //No duplicate, move the cursor one row up.
+			}
 			
 			ContentValues values = new ContentValues();
 			System.out.println(data[0] + ", " + data[1] + ", " + data[2]);
