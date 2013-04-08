@@ -18,6 +18,7 @@ class DbHelper extends SQLiteOpenHelper {
 	public static final String C_ID = BaseColumns._ID; // Special for id
 	public static final String C_NAME = "Name";
 	public static final String C_CATEGORY = "Category";
+	public static final String C_DESCRIPTION  = "Description";
 
 	Context context;
 
@@ -30,8 +31,8 @@ class DbHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// SQL query to create Exercise table
 		String sql_Exercise = String.format(
-				"create table %s (%s TEXT primary key, %s TEXT)",
-				TABLE, C_NAME, C_CATEGORY
+				"create table %s (%s TEXT primary key, %s TEXT, %s TEXT)",
+				TABLE, C_NAME, C_CATEGORY, C_DESCRIPTION
 				);
 
 		Log.d(TAG, "onCreate sql: \n"+sql_Exercise);
@@ -44,15 +45,16 @@ class DbHelper extends SQLiteOpenHelper {
 	//Places an initial field in the exercise database.
 	public boolean testExerciseStart(SQLiteDatabase db){
 		ContentValues values = new ContentValues();
-		values.put(DbHelper.C_NAME, "Christian");
-		values.put(DbHelper.C_CATEGORY, 2000);
+		values.put(DbHelper.C_NAME, "Bänkpress");
+		values.put(DbHelper.C_CATEGORY, "Bröst");
+		values.put(DbHelper.C_DESCRIPTION, "Beefcake exercise");
 		db.insertWithOnConflict(DbHelper.TABLE, null, values,
 				SQLiteDatabase.CONFLICT_REPLACE);
 		return true;
 	}
 
 	@Override
-	//In the case of an update in the game version, all information in the database is flushed.
+	//In the case of an update, all information in the database is flushed.
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// Typically you do ALTER TABLE... here
 		db.execSQL("drop table if exists " + TABLE);
