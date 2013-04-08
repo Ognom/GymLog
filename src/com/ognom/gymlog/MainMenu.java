@@ -2,6 +2,7 @@ package com.ognom.gymlog;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -56,7 +57,24 @@ public class MainMenu extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.bNewExercise:
+			try{
+				Class<?> tempClass = Class.forName("com.ognom.gymlog.NewExercise");
+				Intent tempIntent = new Intent(this, tempClass);
+				System.out.println("test");
+				startActivity(tempIntent);
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		case R.id.bReviewWorkout:
+			//TODO: Call desired class.
+		case R.id.bNewWorkout:
+			//TODO: Call desired class.
+		case R.id.bReviewExercise:
+			//TODO: Call desired class.
+		}
 		
 	}
 
