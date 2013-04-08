@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/review_workout"
+    android:layout_alignTop="@+id/new_workout"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/bNewWorkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="59dp"
+        android:text="@string/new_workout" />
+
+    <Button
+        android:id="@+id/bReviewWorkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:text="@string/review_workout" />
+
+    <Button
+        android:id="@+id/bNewExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_exercise" />
+
+    <Button
+        android:id="@+id/bReviewExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/review_exercise" />
+
+</LinearLayout>
