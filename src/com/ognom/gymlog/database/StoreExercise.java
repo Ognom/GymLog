@@ -28,7 +28,7 @@ class StoreExercise {
 			
 			try{
 			db.insertWithOnConflict(DbHelper.TABLE, null, values,
-					SQLiteDatabase.CONFLICT_REPLACE);
+					SQLiteDatabase.CONFLICT_IGNORE);
 			}
 			
 			catch(Exception e){

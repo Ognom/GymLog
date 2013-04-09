@@ -16,7 +16,7 @@ import android.widget.EditText;
 public class NewExercise extends Activity implements OnClickListener{
 	
 	Button addExercise;
-	EditText exerciseName, description;
+	EditText exerciseName, description, exerciseAddedInfo;
 	AutoCompleteTextView category;
 	DatabaseController dbC;
 	
@@ -35,6 +35,7 @@ public class NewExercise extends Activity implements OnClickListener{
 		addExercise = (Button) findViewById(R.id.bAddExercise);
 		exerciseName = (EditText) findViewById(R.id.eTExerciseName);
 		description = (EditText) findViewById(R.id.eTDescription);
+		exerciseAddedInfo = (EditText) findViewById(R.id.eTExerciseAdded);
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, exerciseSuggestions);
@@ -49,9 +50,12 @@ public class NewExercise extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		Exercise exercise = new Exercise(exerciseName.getText().toString(), new ExerciseCategory(category.getText().toString()), description.getText().toString());
 		//TODO: Right now a new exercise category is created regardless if it already exists. Need to implement a check.
-		if(dbC.storeExercise(exercise))
+		if(dbC.storeExercise(exercise)){
+			exerciseAddedInfo.setText(new String(exercise.getName() + " added!"));
 			System.out.println("Successfully added exercise");
+		}
 		else
+			exerciseAddedInfo.setText(new String("Exercise exists!"));
 			System.out.println("Failed adding exercise");
 	}
 

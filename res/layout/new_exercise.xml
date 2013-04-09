@@ -4,19 +4,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/bAddExercise"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_exercise" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/bAddExercise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_exercise" />
+
+        <EditText
+            android:inputType="text"
+            android:id="@+id/eTExerciseAdded"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00ffffff"
+            android:gravity="right"
+            android:ems="10" />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/eTExerciseName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" 
-        android:hint="@string/exercise_name">
-		
+        android:ems="10"
+        android:hint="@string/exercise_name" >
+
         <requestFocus />
     </EditText>
 
