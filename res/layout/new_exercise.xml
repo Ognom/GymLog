@@ -14,9 +14,9 @@
             android:layout_height="wrap_content"
             android:text="@string/add_exercise" />
 
-        <EditText
-            android:inputType="text"
-            android:id="@+id/eTExerciseAdded"
+        <TextView
+            android:textIsSelectable="false"
+            android:id="@+id/tVExerciseAdded"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"

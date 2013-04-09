@@ -9,6 +9,7 @@ public class Exercise {
 	
 	public Exercise(String mName, ExerciseCategory mCategory, String mDescription)
 	{
+		//TODO: Make sure the name, category and description contains allowed characters.
 		this.mName = mName;
 		this.mCategory = mCategory;
 		this.mDescription = mDescription; 

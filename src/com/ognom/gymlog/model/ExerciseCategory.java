@@ -7,6 +7,7 @@ public class ExerciseCategory {
 	
 	public ExerciseCategory(String mName)
 	{
+		//TODO: Make sure the name contains allowed characters.
 		this.mName = mName;
 	}
 

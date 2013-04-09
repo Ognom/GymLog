@@ -42,7 +42,6 @@ public class DatabaseController{
 		db = dbHelp.getWritableDatabase();
 		boolean store = se.storeExercise(exercise, db);
 		db.close();
-		System.out.println("About to return " + store + "as return value");
 		return store;
 	}
 

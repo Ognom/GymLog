@@ -1,9 +1,5 @@
 package com.ognom.gymlog;
 
-import com.ognom.gymlog.database.DatabaseController;
-import com.ognom.gymlog.model.Exercise;
-import com.ognom.gymlog.model.ExerciseCategory;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.ognom.gymlog.database.DatabaseController;
+import com.ognom.gymlog.model.Exercise;
+import com.ognom.gymlog.model.ExerciseCategory;
 
 public class NewExercise extends Activity implements OnClickListener{
 
 	Button addExercise;
-	EditText exerciseName, description, exerciseAddedInfo;
+	EditText exerciseName, description;
+	TextView  exerciseAddedInfo;
 	AutoCompleteTextView category;
 	DatabaseController dbC;
 
@@ -35,7 +37,7 @@ public class NewExercise extends Activity implements OnClickListener{
 		addExercise = (Button) findViewById(R.id.bAddExercise);
 		exerciseName = (EditText) findViewById(R.id.eTExerciseName);
 		description = (EditText) findViewById(R.id.eTDescription);
-		exerciseAddedInfo = (EditText) findViewById(R.id.eTExerciseAdded);
+		exerciseAddedInfo = (TextView) findViewById(R.id.tVExerciseAdded);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line, exerciseSuggestions);
