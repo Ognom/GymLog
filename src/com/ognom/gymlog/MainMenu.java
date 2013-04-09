@@ -16,7 +16,7 @@ public class MainMenu extends Activity implements OnClickListener{
 	Button newWorkout, reviewWorkout, newExercise, reviewExercise;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		
 		//Set to full screen

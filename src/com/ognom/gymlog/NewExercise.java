@@ -14,15 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class NewExercise extends Activity implements OnClickListener{
-	
+
 	Button addExercise;
 	EditText exerciseName, description, exerciseAddedInfo;
 	AutoCompleteTextView category;
 	DatabaseController dbC;
-	
+
 	//TODO: Dummy, replace with actual exercises from the database
 	String[] exerciseSuggestions = {""};
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,18 +30,18 @@ public class NewExercise extends Activity implements OnClickListener{
 		initialize();
 
 	}
-	
+
 	private void initialize(){
 		addExercise = (Button) findViewById(R.id.bAddExercise);
 		exerciseName = (EditText) findViewById(R.id.eTExerciseName);
 		description = (EditText) findViewById(R.id.eTDescription);
 		exerciseAddedInfo = (EditText) findViewById(R.id.eTExerciseAdded);
-		
+
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, exerciseSuggestions);
+				android.R.layout.simple_dropdown_item_1line, exerciseSuggestions);
 		category = (AutoCompleteTextView) findViewById(R.id.aCTVCategory);
 		category.setAdapter(adapter);
-		
+
 		addExercise.setOnClickListener(this);
 		dbC = DatabaseController.initialize(this);
 	}
@@ -54,9 +54,10 @@ public class NewExercise extends Activity implements OnClickListener{
 			exerciseAddedInfo.setText(new String(exercise.getName() + " added!"));
 			System.out.println("Successfully added exercise");
 		}
-		else
+		else{
 			exerciseAddedInfo.setText(new String("Exercise exists!"));
 			System.out.println("Failed adding exercise");
+		}
 	}
 
 }
