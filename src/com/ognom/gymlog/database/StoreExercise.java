@@ -26,6 +26,7 @@ class StoreExercise {
 		values.put(DbHelper.C_NAME, exercise.getName());
 		values.put(DbHelper.C_CATEGORY, exercise.getCategory().getName());
 		values.put(DbHelper.C_DESCRIPTION, exercise.getDescription());
+		values.put("Row Number", DbHelper.C_ID);
 		try{
 			db.insertOrThrow(DbHelper.TABLE, null, values);
 			return true;

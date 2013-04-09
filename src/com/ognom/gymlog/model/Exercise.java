@@ -19,10 +19,14 @@ public class Exercise {
 		return mId;
 	}
 
+	
+	/**Necessary method? 
+	 * 
 	public void setId(Integer aId) {
 		this.mId = aId;
 	}
-
+	 **/
+	
 	public String getName() {
 		return mName;
 	}

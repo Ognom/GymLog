@@ -22,7 +22,7 @@ class DbHelper extends SQLiteOpenHelper {
 
 	Context context;
 
-	public DbHelper(Context context) {
+	protected DbHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
 		this.context = context;
 	}
@@ -31,8 +31,11 @@ class DbHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// SQL query to create Exercise table
 		String sql_Exercise = String.format(
-				"create table %s (%s TEXT primary key, %s TEXT, %s TEXT)",
-				TABLE, C_NAME, C_CATEGORY, C_DESCRIPTION
+				"create table %s(%s TEXT primary key, " +
+								"%s TEXT, " +
+								"%s TEXT," +
+								"%s INTEGER AUTOINCREMENT)",
+				TABLE, C_NAME, C_CATEGORY, C_DESCRIPTION, "Row Number"
 				);
 
 		Log.d(TAG, "onCreate sql: \n"+sql_Exercise);
