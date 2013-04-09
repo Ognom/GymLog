@@ -33,9 +33,8 @@ class DbHelper extends SQLiteOpenHelper {
 		String sql_Exercise = String.format(
 				"create table %s(%s TEXT primary key, " +
 								"%s TEXT, " +
-								"%s TEXT," +
-								"%s INTEGER AUTOINCREMENT)",
-				TABLE, C_NAME, C_CATEGORY, C_DESCRIPTION, "Row Number"
+								"%s TEXT)",
+				TABLE, C_NAME, C_CATEGORY, C_DESCRIPTION
 				);
 
 		Log.d(TAG, "onCreate sql: \n"+sql_Exercise);

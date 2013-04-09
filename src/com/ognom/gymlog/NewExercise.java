@@ -23,7 +23,7 @@ public class NewExercise extends Activity implements OnClickListener{
 	DatabaseController dbC;
 
 	//TODO: Dummy, replace with actual exercises from the database
-	String[] exerciseSuggestions = {""};
+	String[] exerciseSuggestions = {"test"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

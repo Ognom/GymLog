@@ -15,7 +15,6 @@
             android:text="@string/add_exercise" />
 
         <TextView
-            android:textIsSelectable="false"
             android:id="@+id/tVExerciseAdded"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
