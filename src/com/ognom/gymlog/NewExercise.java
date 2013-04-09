@@ -46,8 +46,6 @@ public class NewExercise extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		dbC.test();
-		// TODO: addExercise is the only element able to call this function. Add the exercise in the database with corresponding elements.
 		String exercise = (exerciseName.getText() + "," + category.getText() + "," + description.getText());
 		if(dbC.storeExercise(exercise))
 			System.out.println("Successfully added exercise");

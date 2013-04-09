@@ -53,12 +53,8 @@ public class DatabaseController{
 		return highscore;
 	}
 	**/
-
-	public void test(){
-		System.out.println("I can access methods in dbC");
-	}
 	
-	//Stores all the highscores in the database.
+	//Stores an exercise in the database.
 	public boolean storeExercise(String text){
 		db = dbHelp.getWritableDatabase();
 		boolean store = se.storeExercise(text, db);
