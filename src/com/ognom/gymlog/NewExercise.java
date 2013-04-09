@@ -1,6 +1,8 @@
 package com.ognom.gymlog;
 
 import com.ognom.gymlog.database.DatabaseController;
+import com.ognom.gymlog.model.Exercise;
+import com.ognom.gymlog.model.ExerciseCategory;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -23,7 +25,6 @@ public class NewExercise extends Activity implements OnClickListener{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_exercise);
 		initialize();
@@ -46,7 +47,8 @@ public class NewExercise extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		String exercise = (exerciseName.getText() + "," + category.getText() + "," + description.getText());
+		Exercise exercise = new Exercise(exerciseName.getText().toString(), new ExerciseCategory(category.getText().toString()), description.getText().toString());
+		//TODO: Right now a new exercise category is created regardless if it already exists. Need to implement a check.
 		if(dbC.storeExercise(exercise))
 			System.out.println("Successfully added exercise");
 		else

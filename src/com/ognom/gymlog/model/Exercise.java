@@ -7,9 +7,11 @@ public class Exercise {
 	private String mDescription;
 	private ExerciseCategory mCategory;
 	
-	public Exercise(String ... args)
+	public Exercise(String mName, ExerciseCategory mCategory, String mDescription)
 	{
-		
+		this.mName = mName;
+		this.mCategory = mCategory;
+		this.mDescription = mDescription; 
 	}
 
 	public Integer getId() {
@@ -42,5 +44,9 @@ public class Exercise {
 
 	public void setmCategory(ExerciseCategory aCategory) {
 		this.mCategory = aCategory;
+	}
+	
+	public String getInfo(){
+		return new String("Name: " + this.mName + ", category: " + this.mCategory + " and description: " + this.mDescription);
 	}
 }

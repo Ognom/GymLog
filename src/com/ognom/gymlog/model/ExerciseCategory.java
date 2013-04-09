@@ -5,9 +5,9 @@ public class ExerciseCategory {
 	private String mId;
 	private String mName;	
 	
-	public ExerciseCategory(Object ... args)
+	public ExerciseCategory(String mName)
 	{
-		//TODO
+		this.mName = mName;
 	}
 
 	public String getmId() {

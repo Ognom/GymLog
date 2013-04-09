@@ -1,5 +1,7 @@
 package com.ognom.gymlog.database;
 
+import com.ognom.gymlog.model.Exercise;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,43 +10,21 @@ import android.util.Log;
 class StoreExercise {
 
 	private static final String TAG = "com.ognom.gymlog.database.StoreExercise.storeExercise()";
-	//private DbHelper helper;
-	//private SQLiteDatabase db;
 
 	public StoreExercise(){
-		//this.helper = helper;
-
+	
 	}
+	
 	/*
-	Method storeExercise opens the database from a writable perspective, and writes down all
-	the exercises into the database.
+	Method storeExercise opens the database from a writable perspective, and writes an exercises into the database on a new row.
 	 */
-	public boolean storeExercise(String text, SQLiteDatabase db){
+	public boolean storeExercise(Exercise exercise, SQLiteDatabase db){
 
-		String[] data = text.split(",");
-		
-		/**
-		String sql = "SELECT * FROM "+DbHelper.TABLE +" order by " + DbHelper.C_NAME;
-		try{
-			Cursor cursor = db.rawQuery(sql, new String []{}); //cursor is set to point before the first entry of the query.
-			cursor.moveToLast(); //cursor points at the last last row unless empty.
-			int t = cursor.getColumnIndex(DbHelper.C_NAME); //t = index of name column (0-based).
-
-
-			while(cursor.getString(t).compareTo(data[0]) < 0 ){ //if < 0 the word is alphabetically lower than where the cursor is pointing at.
-				if(cursor.getString(t).compareTo(data[0]) == 0){ //if == 0, we have a duplicate, break.
-					Log.d(TAG, "Duplicate found");
-					break;
-				}
-				else
-					cursor.moveToPrevious(); //No duplicate, move the cursor one row up.
-			}
-			**/
 			ContentValues values = new ContentValues();
-			//System.out.println(data[0] + ", " + data[1] + ", " + data[2]);
-			values.put(DbHelper.C_NAME, data[0]);
-			values.put(DbHelper.C_CATEGORY, data[1]);
-			values.put(DbHelper.C_DESCRIPTION, data[2]);
+
+			values.put(DbHelper.C_NAME, exercise.getName());
+			values.put(DbHelper.C_CATEGORY, exercise.getCategory().getName());
+			values.put(DbHelper.C_DESCRIPTION, exercise.getDescription());
 			
 			try{
 			db.insertWithOnConflict(DbHelper.TABLE, null, values,
@@ -55,7 +35,7 @@ class StoreExercise {
 				e.printStackTrace();
 				return false;
 			}
-			Log.d(TAG, "Successfully added a new row with name: " + data[0] + ", category: " + data[1] + " and description: " + data[2]);
+			Log.d(TAG, exercise.getInfo());
 			return true;
 
 	}
