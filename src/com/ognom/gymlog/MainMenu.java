@@ -62,24 +62,25 @@ public class MainMenu extends Activity implements OnClickListener{
 			try{
 				Class<?> tempClass = Class.forName("com.ognom.gymlog.NewExercise");
 				Intent tempIntent = new Intent(this, tempClass);
-				//System.out.println("test");
 				startActivity(tempIntent);
+				break;
 			}
 			catch(Exception e){
 				e.printStackTrace();
 			}
-		case R.id.bReviewWorkout:
+		case R.id.bReviewExercise:
 			try{
 				Class<?> tempClass = Class.forName("com.ognom.gymlog.ReviewExercise");
 				Intent tempIntent = new Intent(this, tempClass);
 				startActivity(tempIntent);
+				break;
 			}
 			catch(Exception e){
 				e.printStackTrace();
 			}
 		case R.id.bNewWorkout:
 			//TODO: Call desired class.
-		case R.id.bReviewExercise:
+		case R.id.bReviewWorkout:
 			//TODO: Call desired class.
 		}
 		

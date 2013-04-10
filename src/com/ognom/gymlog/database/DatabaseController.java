@@ -50,6 +50,7 @@ public class DatabaseController{
 	
 	//Fetches all exercises stored in the database.
 	//TODO: Some form of check to make sure a correct list is returned.
+	
 	public List<Exercise> readExercises(){
 		db = dbHelp.getReadableDatabase();
 		List<Exercise> exercises = re.getAllExercises(db);
@@ -63,8 +64,6 @@ public class DatabaseController{
 		db.close();
 		return cursor;
 	}
-
-
 
 
 }

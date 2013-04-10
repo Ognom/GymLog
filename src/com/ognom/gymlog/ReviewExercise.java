@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
@@ -22,7 +23,6 @@ public class ReviewExercise extends Activity implements OnClickListener
 	DatabaseController dbC;
 	EditText exerciseSearch;
 	ListView filteredExercises;
-	ListAdapter adapter;
 	Cursor cursor;
 	
 	@Override
@@ -38,15 +38,16 @@ public class ReviewExercise extends Activity implements OnClickListener
 		filteredExercises = (ListView) findViewById(R.id.lVfilteredExercises);
 		
 		dbC = DatabaseController.initialize(this);
-		cursor = dbC.getExerciseCursor();
-		startManagingCursor(cursor);
+		//cursor = dbC.getExerciseCursor();
+		startManagingCursor(cursor); //TODO: Switch to cursorLoader
 		
-		adapter = new SimpleCursorAdapter(
-				this, //context
-				android.R.layout.simple_list_item_1, //layout used for this view
-				cursor, //cursor pointing at the first exercise ordered by name 
-				null, null
-				);
+		String[] from = new String[] {"gymlog.db.Name"};
+		int[] to = new int[] {android.R.id.text1};
+		
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+				android.R.layout.simple_list_item_1,
+				cursor, from, to);
+		filteredExercises.setAdapter(adapter);
 	}
 	
 	

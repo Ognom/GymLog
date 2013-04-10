@@ -17,13 +17,16 @@ public class ReadExercise {
 		
 	}
 	
+	
+	//Returns a cursor over all exercise, sorted by name and pointing at the first entry.
 	public Cursor getExercisesCursor(SQLiteDatabase aDatabase){
 		String sql = "SELECT * FROM " + DbHelper.TABLE + "ORDER BY " + DbHelper.DB_NAME;
 		Cursor cursor = aDatabase.rawQuery(sql, new String []{});
+		cursor.moveToFirst();
 		return cursor;
 	}
 	
-	// Or you can return the Cursor and do the retrieving from the DatabaseController 
+	//Returns a List of all the Exercises, sorted alphabetically.
 	public List<Exercise> getAllExercises(SQLiteDatabase aDatabase) 
 	{
 		String sql = "SELECT * FROM " + DbHelper.TABLE + "ORDER BY " + DbHelper.DB_NAME;
@@ -32,7 +35,7 @@ public class ReadExercise {
 		try{
 			Cursor cursor = aDatabase.rawQuery(sql, new String []{});
 			while(cursor.moveToNext()){
-				Exercise e = new Exercise(cursor.getString(0), cursor.getString(1),  cursor.getString(2)); //TODO: Make sure we fetch a category. Dummy value of null currently in use.
+				Exercise e = new Exercise(cursor.getString(0), cursor.getString(1),  cursor.getString(2)); 
 				exercises.add(e); //Add the new exercise object		
 				}
 			return exercises;
