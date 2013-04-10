@@ -2,10 +2,12 @@ package com.ognom.gymlog.database;
 
 import java.util.List;
 
+import com.ognom.gymlog.ReviewExercise;
 import com.ognom.gymlog.model.Exercise;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 
@@ -23,6 +25,7 @@ public class DatabaseController{
 	private DatabaseController(Context context){
 		this.dbHelp = new DbHelper(context);
 		this.se = new StoreExercise();
+		this.re = new ReadExercise();
 	}
 	
 	//Starts a new instance of DatabaseController if no earlier instance exists.

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.ognom.gymlog.model.Exercise;
 
@@ -20,9 +21,10 @@ public class ReadExercise {
 	
 	//Returns a cursor over all exercise, sorted by name and pointing at the first entry.
 	public Cursor getExercisesCursor(SQLiteDatabase aDatabase){
-		String sql = "SELECT * FROM " + DbHelper.TABLE + "ORDER BY " + DbHelper.DB_NAME;
-		Cursor cursor = aDatabase.rawQuery(sql, new String []{});
-		cursor.moveToFirst();
+		String sql = "SELECT * FROM " + DbHelper.TABLE + " ORDER BY " + DbHelper.C_NAME;
+		Log.d("Försöker köra kommando", sql);
+			Cursor cursor = aDatabase.rawQuery(sql, null);
+		//cursor.moveToFirst();
 		return cursor;
 	}
 	

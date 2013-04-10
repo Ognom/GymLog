@@ -38,15 +38,22 @@ public class ReviewExercise extends Activity implements OnClickListener
 		filteredExercises = (ListView) findViewById(R.id.lVfilteredExercises);
 		
 		dbC = DatabaseController.initialize(this);
-		//cursor = dbC.getExerciseCursor();
-		startManagingCursor(cursor); //TODO: Switch to cursorLoader
+		cursor = dbC.getExerciseCursor();
+		//startManagingCursor(cursor); //TODO: Switch to cursorLoader
 		
-		String[] from = new String[] {"gymlog.db.Name"};
+		String[] from = new String[] {"gymlog.db.Name", "_id"};
 		int[] to = new int[] {android.R.id.text1};
 		
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+		CursorAdapter adapter = new CursorAdapter(this,
 				android.R.layout.simple_list_item_1,
-				cursor, from, to);
+				cursor, from, to); 
+		
+		
+		
+		
+		
+		
+		
 		filteredExercises.setAdapter(adapter);
 	}
 	
