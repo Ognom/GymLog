@@ -12,5 +12,6 @@
     <string name="exercise_name">Exercise name</string>
     <string name="category">Category</string>
     <string name="description">Type exercise description here</string>
+    <string name="exercise_search">Search for an exercise</string>
 
 </resources>

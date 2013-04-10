@@ -24,7 +24,7 @@ class StoreExercise {
 		ContentValues values = new ContentValues();
 
 		values.put(DbHelper.C_NAME, exercise.getName());
-		values.put(DbHelper.C_CATEGORY, exercise.getCategory().getName());
+		values.put(DbHelper.C_CATEGORY, exercise.getCategory());
 		values.put(DbHelper.C_DESCRIPTION, exercise.getDescription());
 		
 		try{

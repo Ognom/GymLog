@@ -5,9 +5,9 @@ public class Exercise {
 	private Integer mId;
 	private String mName;
 	private String mDescription;
-	private ExerciseCategory mCategory;
+	private String mCategory;
 	
-	public Exercise(String mName, ExerciseCategory mCategory, String mDescription)
+	public Exercise(String mName, String mCategory, String mDescription)
 	{
 		//TODO: Make sure the name, category and description contains allowed characters.
 		this.mName = mName;
@@ -43,11 +43,11 @@ public class Exercise {
 		mDescription = aDescription;
 	}
 
-	public ExerciseCategory getCategory() {
+	public String getCategory() {
 		return mCategory;
 	}
 
-	public void setmCategory(ExerciseCategory aCategory) {
+	public void setmCategory(String aCategory) {
 		this.mCategory = aCategory;
 	}
 	

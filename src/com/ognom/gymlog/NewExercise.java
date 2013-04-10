@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.ognom.gymlog.database.DatabaseController;
 import com.ognom.gymlog.model.Exercise;
-import com.ognom.gymlog.model.ExerciseCategory;
 
 public class NewExercise extends Activity implements OnClickListener{
 
@@ -50,15 +49,15 @@ public class NewExercise extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		Exercise exercise = new Exercise(exerciseName.getText().toString(), new ExerciseCategory(category.getText().toString()), description.getText().toString());
+		Exercise exercise = new Exercise(exerciseName.getText().toString(), category.getText().toString(), description.getText().toString());
 		//TODO: Right now a new exercise category is created regardless if it already exists. Need to implement a check.
 		if(dbC.storeExercise(exercise)){
 			exerciseAddedInfo.setText(new String(exercise.getName() + " added!"));
-			System.out.println("Successfully added exercise");
+			System.out.println("Successfully added exercise: " + exercise.getName());
 		}
 		else{
-			exerciseAddedInfo.setText(new String("Exercise exists!"));
-			System.out.println("Failed adding exercise");
+			exerciseAddedInfo.setText(new String("An exercise called " + exercise.getName() + "already exists!"));
+			System.out.println("Failed adding exercise " + exercise.getName());
 		}
 	}
 

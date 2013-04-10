@@ -1,5 +1,7 @@
 package com.ognom.gymlog.database;
 
+import java.util.List;
+
 import com.ognom.gymlog.model.Exercise;
 
 import android.content.Context;
@@ -14,6 +16,7 @@ public class DatabaseController{
 	private DbHelper dbHelp;
 	private SQLiteDatabase db;
 	private StoreExercise se;
+	private ReadExercise re;
 	
 	
 	//Creates instances of all the other classes in this packet.
@@ -43,6 +46,22 @@ public class DatabaseController{
 		boolean store = se.storeExercise(exercise, db);
 		db.close();
 		return store;
+	}
+	
+	//Fetches all exercises stored in the database.
+	//TODO: Some form of check to make sure a correct list is returned.
+	public List<Exercise> readExercises(){
+		db = dbHelp.getReadableDatabase();
+		List<Exercise> exercises = re.getAllExercises(db);
+		db.close();
+		return exercises;
+	}
+	
+	public Cursor getExerciseCursor(){
+		db = dbHelp.getReadableDatabase();
+		Cursor cursor = re.getExercisesCursor(db);
+		db.close();
+		return cursor;
 	}
 
 

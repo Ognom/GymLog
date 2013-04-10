@@ -69,7 +69,14 @@ public class MainMenu extends Activity implements OnClickListener{
 				e.printStackTrace();
 			}
 		case R.id.bReviewWorkout:
-			//TODO: Call desired class.
+			try{
+				Class<?> tempClass = Class.forName("com.ognom.gymlog.ReviewExercise");
+				Intent tempIntent = new Intent(this, tempClass);
+				startActivity(tempIntent);
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 		case R.id.bNewWorkout:
 			//TODO: Call desired class.
 		case R.id.bReviewExercise:
