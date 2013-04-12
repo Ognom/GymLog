@@ -56,7 +56,7 @@ public class NewExercise extends Activity implements OnClickListener{
 			System.out.println("Successfully added exercise: " + exercise.getName());
 		}
 		else{
-			exerciseAddedInfo.setText(new String("An exercise called " + exercise.getName() + "already exists!"));
+			exerciseAddedInfo.setText(new String("An exercise called " + exercise.getName() + " already exists!"));
 			System.out.println("Failed adding exercise " + exercise.getName());
 		}
 	}

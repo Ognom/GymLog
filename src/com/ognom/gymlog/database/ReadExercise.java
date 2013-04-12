@@ -21,7 +21,7 @@ public class ReadExercise {
 	
 	//Returns a cursor over all exercise, sorted by name and pointing at the first entry.
 	public Cursor getExercisesCursor(SQLiteDatabase aDatabase){
-		String sql = "SELECT id as _id, Name FROM " + DbHelper.TABLE + " ORDER BY " + DbHelper.C_NAME;
+		String sql = "SELECT id as _id, Name, Description, Category FROM " + DbHelper.TABLE + " ORDER BY " + DbHelper.C_NAME;
 		Log.d("Försöker köra kommando", sql);
 		Cursor cursor = aDatabase.rawQuery(sql, null);
 		cursor.moveToFirst();
