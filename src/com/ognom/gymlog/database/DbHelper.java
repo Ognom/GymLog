@@ -13,7 +13,7 @@ class DbHelper extends SQLiteOpenHelper {
 
 	// Exercise variables
 	public static final String DB_NAME = "gymlog.db";
-	public static final int DB_VERSION = 20;
+	public static final int DB_VERSION = 21;
 	public static final String TABLE = "Exercises";
 	public static final String C_ID = BaseColumns._ID; // Special for id
 	public static final String C_NAME = "Name";
@@ -31,7 +31,8 @@ class DbHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// SQL query to create Exercise table
 		String sql_Exercise = String.format(
-				"create table %s(%s TEXT primary key, " +
+				"create table %s(id INTEGER PRIMARY KEY, " +
+								"%s TEXT, " +
 								"%s TEXT, " +
 								"%s TEXT)",
 				TABLE, C_NAME, C_CATEGORY, C_DESCRIPTION
@@ -48,11 +49,11 @@ class DbHelper extends SQLiteOpenHelper {
 	public boolean testExerciseStart(SQLiteDatabase db){
 		System.out.println("testExerciseStart method executed");
 		ContentValues values = new ContentValues();
+		values.put("id", "null");
 		values.put(DbHelper.C_NAME, "Bänkpress");
 		values.put(DbHelper.C_CATEGORY, "Bröst");
 		values.put(DbHelper.C_DESCRIPTION, "Beefcake exercise");
-		db.insertWithOnConflict(DbHelper.TABLE, null, values,
-				SQLiteDatabase.CONFLICT_REPLACE);
+		db.insertOrThrow(DbHelper.TABLE, null, values);
 		return true;
 	}
 

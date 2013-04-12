@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.CursorLoader;
+import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,19 +42,10 @@ public class ReviewExercise extends Activity implements OnClickListener
 		cursor = dbC.getExerciseCursor();
 		//startManagingCursor(cursor); //TODO: Switch to cursorLoader
 		
-		String[] from = new String[] {"gymlog.db.Name", "_id"};
+		String[] from = new String[] {"Name"};
 		int[] to = new int[] {android.R.id.text1};
 		
-		CursorAdapter adapter = new CursorAdapter(this,
-				android.R.layout.simple_list_item_1,
-				cursor, from, to); 
-		
-		
-		
-		
-		
-		
-		
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, cursor, from, to, 0);
 		filteredExercises.setAdapter(adapter);
 	}
 	
