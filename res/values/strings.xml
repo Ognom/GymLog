@@ -13,5 +13,6 @@
     <string name="category">Category</string>
     <string name="description">Type exercise description here</string>
     <string name="exercise_search">Search for an exercise</string>
+    <string name="delete">Delete</string>
 
 </resources>

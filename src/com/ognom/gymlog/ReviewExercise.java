@@ -29,8 +29,8 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 	ListView filteredExercises;
 	Cursor cursor;
 	SimpleCursorAdapter adapter;
-	Button addExercise;
-	
+	Button addExercise, delete;
+
 	float historicX = Float.NaN, historicY = Float.NaN;
 	static final int DELTA = 50;
 	enum Direction {LEFT, RIGHT;}
@@ -45,6 +45,7 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 
 	private void initialize(){
 		exerciseSearch = (EditText) findViewById(R.id.eTExerciseSearch);
+		delete = (Button) findViewById(R.id.bDelete);
 
 		addExercise = (Button) findViewById(R.id.bAddExercise);
 		addExercise.setClickable(true);
@@ -55,33 +56,39 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 		filteredExercises.setTextFilterEnabled(true);
 
 		filteredExercises.setOnTouchListener(new OnTouchListener() {
-		    public boolean onTouch(View v, MotionEvent event) 
-		    {
+			public boolean onTouch(View v, MotionEvent event) 
+			{
 
-		        switch (event.getAction()) 
-		        {
-		            case MotionEvent.ACTION_DOWN:
-		            historicX = event.getX();
-		            historicY = event.getY();
-		            break;
+				switch (event.getAction()) 
+				{
+				case MotionEvent.ACTION_DOWN:
+					historicX = event.getX();
+					historicY = event.getY();
+					break;
 
-		            case MotionEvent.ACTION_UP:
-		            if (event.getX() - historicX < -DELTA) 
-		            {
-		               // FunctionDeleteRowWhenSlidingLeft();
-		            	System.out.println("Drar åt vänster");		            	
-		                return true;
-		            }
-		            else if (event.getX() - historicX > DELTA)  
-		            {
-		                //FunctionDeleteRowWhenSlidingRight();
-		            	System.out.println("Drar åt höger");
-		                return true;
-		            } break;
-		            default: return false;
-		        }
-		        return false;
-		    }
+				case MotionEvent.ACTION_UP:
+					if (event.getX() - historicX < -DELTA) 
+					{
+						delete = (Button) findViewById(R.id.bDelete);
+						if(delete.getVisibility() == 0)						
+							delete.setVisibility(4); //Invisible
+						
+						System.out.println("Drar åt vänster");		            	
+						return true;
+					}
+					else if (event.getX() - historicX > DELTA)  
+					{
+						delete = (Button) findViewById(R.id.bDelete);
+						if(delete.getVisibility() == 4)
+							delete.setVisibility(0); //Visible
+						
+						System.out.println("Drar åt höger");
+						return true;
+					} break;
+				default: return false;
+				}
+				return false;
+			}
 		});
 
 
