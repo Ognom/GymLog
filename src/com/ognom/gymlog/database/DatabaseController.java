@@ -67,6 +67,13 @@ public class DatabaseController{
 		db.close();
 		return cursor;
 	}
+	
+	public Cursor getExerciseCursor(CharSequence s){
+		db = dbHelp.getReadableDatabase();
+		Cursor cursor = re.getExercisesCursor(db, s);
+		db.close();
+		return cursor;
+	}
 
 
 }

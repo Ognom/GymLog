@@ -18,8 +18,17 @@ public class ReadExercise {
 		
 	}
 	
+	//Returns a cursor over the exercises that fits the charsequence.
+	public Cursor getExercisesCursor(SQLiteDatabase aDatabase, CharSequence s){
+		String constraint = s.toString();
+		String sql = "SELECT id as _id, Name, Description, Category FROM " + DbHelper.TABLE + " WHERE (Name LIKE '%" + constraint + "%') ORDER BY " + DbHelper.C_NAME;
+		Log.d("Försöker köra kommando", sql);
+		Cursor cursor = aDatabase.rawQuery(sql, null);
+		cursor.moveToFirst();
+		return cursor;
+	}
 	
-	//Returns a cursor over all exercise, sorted by name and pointing at the first entry.
+	//Returns a cursor over all exercises, sorted by name and pointing at the first entry.
 	public Cursor getExercisesCursor(SQLiteDatabase aDatabase){
 		String sql = "SELECT id as _id, Name, Description, Category FROM " + DbHelper.TABLE + " ORDER BY " + DbHelper.C_NAME;
 		Log.d("Försöker köra kommando", sql);
@@ -31,13 +40,14 @@ public class ReadExercise {
 	//Returns a List of all the Exercises, sorted alphabetically.
 	public List<Exercise> getAllExercises(SQLiteDatabase aDatabase) 
 	{
-		String sql = "SELECT * FROM " + DbHelper.TABLE + "ORDER BY " + DbHelper.DB_NAME;
+		String sql = "SELECT * FROM " + DbHelper.TABLE + " ORDER BY " + DbHelper.C_NAME;
 		System.out.println("About to execute sql-command: " + sql);
 		
 		try{
 			Cursor cursor = aDatabase.rawQuery(sql, new String []{});
+			cursor.moveToFirst();
 			while(cursor.moveToNext()){
-				Exercise e = new Exercise(cursor.getString(0), cursor.getString(1),  cursor.getString(2)); 
+				Exercise e = new Exercise(cursor.getString(1), cursor.getString(2),  cursor.getString(3)); 
 				exercises.add(e); //Add the new exercise object		
 				}
 			return exercises;

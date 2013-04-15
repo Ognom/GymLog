@@ -58,8 +58,7 @@ public class ReviewExercise extends Activity implements OnKeyListener, OnItemCli
 			
 			@Override
 			public Cursor runQuery(CharSequence s) {
-				
-				return null;
+				return dbC.getExerciseCursor(s);
 			}
 		});
 		
