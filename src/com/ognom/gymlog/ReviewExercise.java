@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -19,7 +21,7 @@ import android.widget.ListView;
 
 import com.ognom.gymlog.database.DatabaseController;
 
-//Shows a list of all the Exercises
+//Shows a list over all exercises which is filtered in the EditText.
 public class ReviewExercise extends Activity implements OnItemClickListener, OnClickListener
 {
 	DatabaseController dbC;
@@ -28,6 +30,10 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 	Cursor cursor;
 	SimpleCursorAdapter adapter;
 	Button addExercise;
+	
+	float historicX = Float.NaN, historicY = Float.NaN;
+	static final int DELTA = 50;
+	enum Direction {LEFT, RIGHT;}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -48,7 +54,39 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 		filteredExercises.setOnItemClickListener(this);
 		filteredExercises.setTextFilterEnabled(true);
 
-		
+		filteredExercises.setOnTouchListener(new OnTouchListener() {
+		    public boolean onTouch(View v, MotionEvent event) 
+		    {
+
+		        switch (event.getAction()) 
+		        {
+		            case MotionEvent.ACTION_DOWN:
+		            historicX = event.getX();
+		            historicY = event.getY();
+		            break;
+
+		            case MotionEvent.ACTION_UP:
+		            if (event.getX() - historicX < -DELTA) 
+		            {
+		               // FunctionDeleteRowWhenSlidingLeft();
+		            	System.out.println("Drar åt vänster");		            	
+		                return true;
+		            }
+		            else if (event.getX() - historicX > DELTA)  
+		            {
+		                //FunctionDeleteRowWhenSlidingRight();
+		            	System.out.println("Drar åt höger");
+		                return true;
+		            } break;
+		            default: return false;
+		        }
+		        return false;
+		    }
+		});
+
+
+
+
 	}
 
 	//TODO: Low priority, fancy graph method for fancy users.
@@ -60,6 +98,7 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
+
 		Cursor cursor = (Cursor) adapter.getItemAtPosition(position);
 		String exerciseName = cursor.getString(1);
 
@@ -78,20 +117,20 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	protected void onPause(){
 		System.out.println("Inne i onPause");
 		dbC.close();
 		super.onPause();
 	}
-	
+
 	@Override
 	protected void onResume(){
 		System.out.println("Inne i onResume");
 		super.onResume();
 	}
-	
+
 	@Override
 	protected void onStart(){
 		dbC = DatabaseController.initialize(this);
@@ -136,12 +175,12 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 		System.out.println("Inne i onStart");
 		super.onStart();
 	}
-	
+
 	@Override
 	protected void onStop(){
 		System.out.println("Inne i onStop");
 		super.onStop();
 	}
-	    
-	 
+
+
 }
