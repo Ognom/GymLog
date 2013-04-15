@@ -23,6 +23,7 @@ class StoreExercise {
 
 		String sql = ("SELECT * FROM " + DbHelper.TABLE + " WHERE " + DbHelper.C_NAME + " = '" + exercise.getName() + "'"); //If there's already an exercise with the same name.
 		Cursor c = db.rawQuery(sql, null); //Get cursor over all exercises with the name we're trying to add.
+		
 		if(!c.moveToFirst()){ //Move to first entry, if true there's a duplicate meaning we don't wish to enter the if-statement. If false, it's a unique exercise and we insert into the database.
 
 			ContentValues values = new ContentValues();
@@ -33,13 +34,16 @@ class StoreExercise {
 
 			try{
 				db.insertOrThrow(DbHelper.TABLE, null, values);
+				c.close();
 				return true;
 			}
 			catch(SQLException e){
 				Log.e(TAG, e.toString());
+				c.close();
 				return false;
 			}
 		}
+		c.close();
 		return false;
 	}
 }

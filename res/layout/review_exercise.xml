@@ -4,15 +4,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <EditText
-        android:hint="@string/exercise_search"
-        android:id="@+id/eTExerciseSearch"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10" >
+        android:layout_height="wrap_content" >
 
-        <requestFocus />
-    </EditText>
+        <EditText
+            android:id="@+id/eTExerciseSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/exercise_search" />
+
+        <Button
+            android:id="@+id/bAddExercise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_exercise" />
+
+    </LinearLayout>
 
     <ListView android:id="@+id/lVFilteredExercises"
         android:layout_width="fill_parent" android:layout_height="fill_parent"

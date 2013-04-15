@@ -25,6 +25,10 @@ public class Workout
 		mExercises = new ArrayList<Exercise>();
 		mExercises.addAll(aExercises);
 	}
+	
+	public void addExercise(Exercise exercise){
+		mExercises.add(exercise);
+	}
 		
 	public Integer getmId() {
 		return mId;

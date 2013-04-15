@@ -74,7 +74,16 @@ public class DatabaseController{
 		db.close();
 		return cursor;
 	}
-
+	
+	//Closes the database handled by this dbC.
+	public void close(){
+		dbHelp.close();
+	}
+	
+	//Opens the database handled by this dBC.
+	public void open(){
+		dbHelp.getReadableDatabase();		
+	}
 
 }
 
