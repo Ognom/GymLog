@@ -14,10 +14,13 @@
         <requestFocus />
     </EditText>
 
-    <ListView
-        android:id="@+id/lVfilteredExercises"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </ListView>
+    <ListView android:id="@+id/lVFilteredExercises"
+        android:layout_width="fill_parent" android:layout_height="fill_parent"
+        android:layout_weight="1.0"
+        android:textColor="#444444"
+        android:divider="@layout/list_divider"
+        android:dividerHeight="1px"
+        android:cacheColorHint="#00000000">
+</ListView>
 
 </LinearLayout>

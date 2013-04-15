@@ -41,7 +41,7 @@ public class ReviewExercise extends Activity implements OnKeyListener, OnItemCli
 		exerciseSearch = (EditText) findViewById(R.id.eTExerciseSearch);
 
 
-		filteredExercises = (ListView) findViewById(R.id.lVfilteredExercises);
+		filteredExercises = (ListView) findViewById(R.id.lVFilteredExercises);
 		filteredExercises.setOnItemClickListener(this);
 		filteredExercises.setTextFilterEnabled(true);
 
@@ -55,7 +55,7 @@ public class ReviewExercise extends Activity implements OnKeyListener, OnItemCli
 		adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, cursor, from, to, 0);
 		filteredExercises.setAdapter(adapter);
 		adapter.setFilterQueryProvider(new FilterQueryProvider() {
-			
+		
 			@Override
 			public Cursor runQuery(CharSequence s) {
 				return dbC.getExerciseCursor(s);
@@ -107,7 +107,10 @@ public class ReviewExercise extends Activity implements OnKeyListener, OnItemCli
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-		//TODO: Show a more detailed description of the selected exercise. Perhaps a new class and activity?
+	public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
+		Cursor cursor = (Cursor) adapter.getItemAtPosition(position);
+		String exerciseName = cursor.getString(1);
+		
+		//TODO: Fetch a more detailed description of the selected exercise. Perhaps a new class and activity?
 	}
 }

@@ -57,10 +57,9 @@ public class ReadExercise {
 			e.printStackTrace();
 		}
 		
-		return exercises;
-
-		
+		return exercises;		
 	}
+	
 	
 	public Exercise getExercise(Integer aId)
 	{
