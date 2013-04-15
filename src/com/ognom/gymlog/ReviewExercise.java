@@ -49,10 +49,10 @@ public class ReviewExercise extends Activity implements OnKeyListener, OnItemCli
 		cursor = dbC.getExerciseCursor();
 		//startManagingCursor(cursor); //TODO: Switch to cursorLoader
 
-		String[] from = new String[] {"Name", "Description"};
-		int[] to = new int[] {android.R.id.text1, android.R.id.text2};
+		String[] from = new String[] {"Name", "Description", "Category"};
+		int[] to = new int[] {R.id.row_name, R.id.row_description, R.id.row_category};
 
-		adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, cursor, from, to, 0);
+		adapter = new SimpleCursorAdapter(this, R.layout.row, cursor, from, to, 0);
 		filteredExercises.setAdapter(adapter);
 		adapter.setFilterQueryProvider(new FilterQueryProvider() {
 		
