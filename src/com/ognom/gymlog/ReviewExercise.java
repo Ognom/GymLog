@@ -27,6 +27,8 @@ import com.ognom.gymlog.util.SwipeForDelete;
 //Shows a list over all exercises which is filtered in the EditText.
 public class ReviewExercise extends Activity implements OnItemClickListener, OnClickListener
 {
+	
+	//Instantiate variables.
 	DatabaseController dbC;
 	EditText exerciseSearch;
 	ListView filteredExercises;
@@ -34,10 +36,6 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 	SimpleCursorAdapter adapter;
 	Button addExercise, delete;
 	GestureDetector gd;
-
-	float historicX = Float.NaN, historicY = Float.NaN;
-	static final int DELTA = 50;
-	enum Direction {LEFT, RIGHT;}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -48,6 +46,8 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 	}
 
 	private void initialize(){
+		
+		//Begin declaring variables.
 		exerciseSearch = (EditText) findViewById(R.id.eTExerciseSearch);
 
 		addExercise = (Button) findViewById(R.id.bAddExercise);
@@ -59,9 +59,11 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 		filteredExercises.setOnItemClickListener(this);
 		filteredExercises.setTextFilterEnabled(true);
 		
+		//Add a custom GestureDetector located in util. Used when handling flings (swipes).
 		gd = new GestureDetector(this, new SwipeForDelete(filteredExercises));
 		filteredExercises.setOnTouchListener(new OnTouchListener() {
 			
+			//Override onTouch to make sure all known gestures are handled by the custom GestureDetector.
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				return gd.onTouchEvent(event);
@@ -75,7 +77,9 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 
 		return null;
 	}
-
+	
+	
+	//Currently only prints out the name of the exercise that's being clicked on. 
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
 
@@ -85,7 +89,9 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 
 		//TODO: Fetch a more detailed description of the selected exercise. Perhaps a new class and activity?
 	}
-
+	
+	
+	//Handles all the onClicks. Currently only one element is clickable, thus no logic.
 	@Override
 	public void onClick(View arg0) {
 		//Only one button linked here, add exercise.
