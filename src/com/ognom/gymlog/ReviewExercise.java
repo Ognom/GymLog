@@ -67,49 +67,6 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 				return gd.onTouchEvent(event);
 			}
 		});
-
-		/**
-		filteredExercises.setOnTouchListener(new OnTouchListener() {
-			public boolean onTouch(View view, MotionEvent event) 
-			{
-				int adapterIndex = filteredExercises.pointToPosition ( (int)event.getX(), (int)event.getY());
-				int firstViewIndex = filteredExercises.getFirstVisiblePosition();
-				int viewIndex = adapterIndex - firstViewIndex;
-				System.out.println("viewIndex = " + viewIndex);
-				View v = filteredExercises.getChildAt(viewIndex);
-				System.out.println("Id: " + v.getId());
-				//TODO: Make sure the delete button is shown at the correct item in the list view. Currently always shows on first item rather than affected. 
-				switch (event.getAction()) 
-				{
-				case MotionEvent.ACTION_DOWN:
-					historicX = event.getX();
-					historicY = event.getY();
-					break;
-					
-				case MotionEvent.ACTION_UP:
-					if (event.getX() - historicX < -DELTA) 
-					{
-						delete = (Button) findViewById(R.id.bDelete);
-						if(delete.getVisibility() == 0)						
-							delete.setVisibility(4); //Invisible
-							
-						System.out.println("Drar åt vänster");		            	
-						return true;
-					}
-					else if (event.getX() - historicX > DELTA)  
-					{
-						delete = (Button) findViewById(R.id.bDelete);
-						if(delete.getVisibility() == 4)
-							delete.setVisibility(0); //Visible
-						
-						System.out.println("Drar åt höger");
-						return true;
-					} break;
-				default: return false;
-				}
-				return false;
-			}
-		}); **/
 	}
 
 	//TODO: Low priority, fancy graph method for fancy users.
@@ -124,6 +81,7 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 
 		Cursor cursor = (Cursor) adapter.getItemAtPosition(position);
 		String exerciseName = cursor.getString(1);
+		System.out.println(exerciseName);
 
 		//TODO: Fetch a more detailed description of the selected exercise. Perhaps a new class and activity?
 	}

@@ -23,8 +23,10 @@ public class SwipeForDelete extends SimpleOnGestureListener{
     	System.out.println("Swipe detected in SwipeForDelete");
         if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
         		&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY){
-            if (showDeleteButton(e1))
+        	System.out.println("Conditions fulfilled in SwipeForDelete");
+            if (showDeleteButton(e1)){
                 return true;
+            }
         }
         return super.onFling(e1, e2, velocityX, velocityY);
     }
@@ -35,7 +37,7 @@ public class SwipeForDelete extends SimpleOnGestureListener{
     }
 
     private boolean showDeleteButton(int pos) {
-        View child = list.getChildAt(pos);
+        View child = list.getChildAt(pos - list.getFirstVisiblePosition());
         if (child != null){
             Button delete = (Button) child.findViewById(R.id.bDelete);
             if (delete != null)
@@ -51,7 +53,6 @@ public class SwipeForDelete extends SimpleOnGestureListener{
     //Overriding to allow onFling to execute.
     @Override
     public boolean onDown(MotionEvent e) {
-    	System.out.println("onDown detected in SwipeForDelete");
         return true;        
     }
 }
