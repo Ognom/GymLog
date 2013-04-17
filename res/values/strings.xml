@@ -14,5 +14,6 @@
     <string name="description">Type exercise description here</string>
     <string name="exercise_search">Search for an exercise</string>
     <string name="delete">Delete</string>
+    <string name="cartman_picture">A sweet picture of Cartman</string>
 
 </resources>

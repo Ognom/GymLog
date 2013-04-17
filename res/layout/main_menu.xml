@@ -3,15 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/review_workout"
-    android:layout_alignTop="@+id/new_workout"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:gravity="center" >
+
+    <ImageView
+        android:contentDescription="@string/cartman_picture"
+        android:id="@+id/iVBeefcake"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/beefcakecartman" />
 
     <Button
         android:id="@+id/bNewWorkout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="59dp"
+        android:gravity="right"
         android:text="@string/new_workout" />
 
     <Button
