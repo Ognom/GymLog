@@ -14,8 +14,8 @@ public class SwipeForDelete extends SimpleOnGestureListener{
 	
     private static final float SWIPE_MIN_DISTANCE = 50; //50 pixels.
 	private static final float SWIPE_THRESHOLD_VELOCITY =50; //Minimum of 50 pixels / second.
-	private ListView list; //List view to remove/display button.
-
+	private ListView list; //List view to remove/display
+	
     public SwipeForDelete(ListView list) {
         this.list = list;
     }
@@ -23,8 +23,10 @@ public class SwipeForDelete extends SimpleOnGestureListener{
     //Overrides onFling().
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+    	System.out.println("Inside onFling");
         if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
         		&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY)
+        	System.out.println("Inside onFling, conditions OK");
             if (showDeleteButton(e1))
                 return true;
         return super.onFling(e1, e2, velocityX, velocityY);
@@ -33,6 +35,7 @@ public class SwipeForDelete extends SimpleOnGestureListener{
     //Calculates the position of the swipe and returns showDeleteButton(int pos).
     private boolean showDeleteButton(MotionEvent e1) {
         int pos = list.pointToPosition((int)e1.getX(), (int)e1.getY());
+        System.out.println("Position: " + pos);
         return showDeleteButton(pos);
     }
     
@@ -40,8 +43,10 @@ public class SwipeForDelete extends SimpleOnGestureListener{
     private boolean showDeleteButton(int pos) {
         View child = list.getChildAt(pos - list.getFirstVisiblePosition());
         if (child != null){
+            System.out.println("Child not null");
             Button delete = (Button) child.findViewById(R.id.bDelete);
             if (delete != null)
+                System.out.println("Delete not null, visibility: " + delete.getVisibility());
                 if (delete.getVisibility() == View.INVISIBLE)
                     delete.setVisibility(View.VISIBLE);
                 else
