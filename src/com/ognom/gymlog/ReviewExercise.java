@@ -9,7 +9,6 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +21,7 @@ import android.widget.FilterQueryProvider;
 import android.widget.ListView;
 
 import com.ognom.gymlog.database.DatabaseController;
+import com.ognom.gymlog.util.ExpandedCursorAdapter;
 import com.ognom.gymlog.util.SwipeForDelete;
 
 //Shows a list over all exercises which is filtered in the EditText.
@@ -59,7 +59,7 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 		filteredExercises.setOnItemClickListener(this);
 		filteredExercises.setTextFilterEnabled(true);
 		
-		//Add a custom GestureDetector located in util. Used when handling flings (swipes).
+		//Add a custom GestureDetector located in util package. Used when handling flings (swipes).
 		gd = new GestureDetector(this, new SwipeForDelete(filteredExercises));
 		filteredExercises.setOnTouchListener(new OnTouchListener() {
 			
@@ -127,7 +127,7 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 		String[] from = new String[] {"Name", "Description", "Category"};
 		int[] to = new int[] {R.id.row_name, R.id.row_description, R.id.row_category};
 
-		adapter = new SimpleCursorAdapter(this, R.layout.row, cursor, from, to, 0);
+		adapter = new ExpandedCursorAdapter(this, R.layout.row, cursor, from, to, 0, filteredExercises);
 		filteredExercises.setAdapter(adapter);
 		adapter.setFilterQueryProvider(new FilterQueryProvider() {
 
