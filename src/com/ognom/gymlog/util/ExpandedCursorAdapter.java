@@ -3,6 +3,8 @@ package com.ognom.gymlog.util;
 
 
 import com.ognom.gymlog.R;
+import com.ognom.gymlog.database.DatabaseController;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -18,10 +20,12 @@ public class ExpandedCursorAdapter extends SimpleCursorAdapter{
 
 	protected ListView listView;
 	protected static final String TAG = "ExpandedCursorAdapter";
+	private DatabaseController dbC;
 
 
     public ExpandedCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags, ListView listview) {
     	super(context, layout, c, from, to, flags);
+    	dbC = dbC.initialize();
         this.listView = listview;
     }
 
@@ -40,8 +44,10 @@ public class ExpandedCursorAdapter extends SimpleCursorAdapter{
             final int position = listView.getPositionForView((View) v.getParent());
             Cursor c = (Cursor)listView.getItemAtPosition(position);
             String exerciseName = c.getString(1);
+            c = dbC.removeExercise(exerciseName); //Remove the desired exercise and retrieve a new cursor.
             Log.v(TAG, "Delete clicked, removing " + exerciseName + "from the Database");
-            
+            changeCursor(c); //Update the listView using the new cursor.
+            v.setVisibility(View.INVISIBLE); //Set the delete button to invisible in order to prevent the new item at position from having a delete button.
         }
     };
 

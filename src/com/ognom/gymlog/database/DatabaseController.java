@@ -84,6 +84,13 @@ public class DatabaseController{
 	public void open(){
 		dbHelp.getReadableDatabase();		
 	}
+	
+	public Cursor removeExercise(String exercise){
+		db = dbHelp.getWritableDatabase();
+		db.delete(dbHelp.TABLE, dbHelp.C_NAME + "=?", new String[] {exercise}); //Remove row where Name = exercise.
+		db.close();
+		return getExerciseCursor();
+	}
 
 }
 
