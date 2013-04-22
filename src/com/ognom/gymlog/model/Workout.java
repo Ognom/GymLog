@@ -51,11 +51,4 @@ public class Workout
 	public List<Exercise> getmExercises() {
 		return mExercises;
 	}
-	public void setExercises(List<Exercise> aExercises) {
-		this.mExercises = mExercises;
-	}
-	
-	
-	
-	
 }

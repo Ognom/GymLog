@@ -2,12 +2,11 @@ package com.ognom.gymlog.database;
 
 import java.util.List;
 
-import com.ognom.gymlog.ReviewExercise;
+
 import com.ognom.gymlog.model.Exercise;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 
@@ -87,7 +86,7 @@ public class DatabaseController{
 	
 	public Cursor removeExercise(String exercise){
 		db = dbHelp.getWritableDatabase();
-		db.delete(dbHelp.TABLE, dbHelp.C_NAME + "=?", new String[] {exercise}); //Remove row where Name = exercise.
+		db.delete(DbHelper.TABLE, DbHelper.C_NAME + "=?", new String[] {exercise}); //Remove row where Name = exercise.
 		db.close();
 		return getExerciseCursor();
 	}

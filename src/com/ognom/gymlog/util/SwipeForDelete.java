@@ -9,7 +9,11 @@ import android.widget.ListView;
 import com.ognom.gymlog.R;
 
 
-//A custom class that handles swipes on a list view. Displays or removes a delete button depending on previous visibility.
+/**
+ * A custom SimpleOnGestureListener expanded to handle swipes on a list view. Displays or removes a delete button depending on previous visibility.
+ * @author Ognom
+ *
+ */
 public class SwipeForDelete extends SimpleOnGestureListener{
 
 	private static final float SWIPE_MIN_DISTANCE = 50; //50 pixels.
