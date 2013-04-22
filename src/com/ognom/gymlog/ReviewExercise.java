@@ -27,26 +27,29 @@ import com.ognom.gymlog.util.SwipeForDelete;
 //Shows a list over all exercises which is filtered in the EditText.
 public class ReviewExercise extends Activity implements OnItemClickListener, OnClickListener
 {
-	
+
 	//Instantiate variables.
-	DatabaseController dbC;
-	EditText exerciseSearch;
-	ListView filteredExercises;
-	Cursor cursor;
-	SimpleCursorAdapter adapter;
-	Button addExercise, delete;
-	GestureDetector gd;
+	private DatabaseController dbC;
+	private EditText exerciseSearch;
+	private ListView filteredExercises;
+	private Cursor cursor;
+	private SimpleCursorAdapter adapter;
+	private Button addExercise;
+	private GestureDetector gd;
+	private boolean isWorkout; //Determines if the activity is called by Review Exercise or New Workout.
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
+		isWorkout = getIntent().getExtras().getBoolean("Workout"); //
 		setContentView(R.layout.review_exercise);
 		initialize();
 	}
 
 	private void initialize(){
-		
+
 		//Begin declaring variables.
 		exerciseSearch = (EditText) findViewById(R.id.eTExerciseSearch);
 
@@ -58,11 +61,11 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 		filteredExercises.setFocusableInTouchMode(true);
 		filteredExercises.setOnItemClickListener(this);
 		filteredExercises.setTextFilterEnabled(true);
-		
+
 		//Add a custom GestureDetector located in util package. Used when handling flings (swipes).
 		gd = new GestureDetector(this, new SwipeForDelete(filteredExercises));
 		filteredExercises.setOnTouchListener(new OnTouchListener() {
-			
+
 			//Override onTouch to make sure all known gestures are handled by the custom GestureDetector.
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -77,20 +80,23 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 
 		return null;
 	}
-	
-	
-	//Currently only prints out the name of the exercise that's being clicked on. 
+
+
+	//Called when an item in the listView is clicked.
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
-
+		if(isWorkout){ //If New workout is the parent activity.
+			System.out.println("Clicked on an exercise from new workout");
+		}
+		else{ //If Review Exercise is the parent activity.
 		Cursor cursor = (Cursor) adapter.getItemAtPosition(position);
 		String exerciseName = cursor.getString(1);
 		System.out.println(exerciseName);
-
 		//TODO: Fetch a more detailed description of the selected exercise. Perhaps a new class and activity?
+		}
 	}
-	
-	
+
+
 	//Handles all the onClicks. Currently only one element is clickable, thus no logic.
 	@Override
 	public void onClick(View arg0) {
