@@ -25,7 +25,7 @@ public class ExpandedCursorAdapter extends SimpleCursorAdapter{
 
     public ExpandedCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags, ListView listview) {
     	super(context, layout, c, from, to, flags);
-    	dbC = dbC.initialize();
+    	dbC = DatabaseController.initialize();
         this.listView = listview;
     }
 
@@ -47,7 +47,7 @@ public class ExpandedCursorAdapter extends SimpleCursorAdapter{
             c = dbC.removeExercise(exerciseName); //Remove the desired exercise and retrieve a new cursor.
             Log.v(TAG, "Delete clicked, removing " + exerciseName + "from the Database");
             changeCursor(c); //Update the listView using the new cursor.
-            v.setVisibility(View.INVISIBLE); //Set the delete button to invisible in order to prevent the new item at position from having a delete button.
+            SwipeForDelete.deletedExercise();
         }
     };
 
