@@ -36,7 +36,7 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 	private SimpleCursorAdapter adapter;
 	private Button addExercise;
 	private GestureDetector gd;
-	private boolean isWorkout; //Determines if the activity is called by Review Exercise or New Workout.
+	private static boolean isWorkout; //Determines if the activity is called by Review Exercise or New Workout.
 
 
 	@Override
@@ -62,19 +62,22 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 		filteredExercises.setOnItemClickListener(this);
 		filteredExercises.setTextFilterEnabled(true);
 
-		//Add a custom GestureDetector located in util package. Used when handling flings (swipes).
+		//Add a custom GestureDetector located in the util package. Used when handling flings (swipes).
+		if(!isWorkout){ //Not necessary to add gestureDetector if parent activity is New Workout.
 		gd = new GestureDetector(this, new SwipeForDelete(filteredExercises));
-		filteredExercises.setOnTouchListener(new OnTouchListener() {
 
-			//Override onTouch to make sure all known gestures are handled by the custom GestureDetector.
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				return gd.onTouchEvent(event);
-			}
-		});
+			filteredExercises.setOnTouchListener(new OnTouchListener() {
+
+				//Override onTouch to make sure all known gestures are handled by the custom GestureDetector.
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					return gd.onTouchEvent(event);
+				}
+			});
+		}
 	}
 
-	//TODO: Low priority, fancy graph method for fancy users.
+	//TODO: Low priority. Fancy graph method for fancy users.
 	private ProgressionGraph getGraph()
 	{
 
@@ -89,10 +92,10 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 			System.out.println("Clicked on an exercise from new workout");
 		}
 		else{ //If Review Exercise is the parent activity.
-		Cursor cursor = (Cursor) adapter.getItemAtPosition(position);
-		String exerciseName = cursor.getString(1);
-		System.out.println(exerciseName);
-		//TODO: Fetch a more detailed description of the selected exercise. Perhaps a new class and activity?
+			Cursor cursor = (Cursor) adapter.getItemAtPosition(position);
+			String exerciseName = cursor.getString(1);
+			System.out.println(exerciseName);
+			//TODO: Fetch a more detailed description of the selected exercise. Perhaps a new class and activity?
 		}
 	}
 

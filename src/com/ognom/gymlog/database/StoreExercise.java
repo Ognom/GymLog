@@ -21,7 +21,7 @@ class StoreExercise {
 	 */
 	public boolean storeExercise(Exercise exercise, SQLiteDatabase db){
 
-		String sql = ("SELECT * FROM " + DbHelper.TABLE + " WHERE " + DbHelper.C_NAME + " = '" + exercise.getName() + "'"); //If there's already an exercise with the same name.
+		String sql = ("SELECT * FROM " + DbHelper.TABLE_1 + " WHERE " + DbHelper.C_NAME + " = '" + exercise.getName() + "'"); //If there's already an exercise with the same name.
 		Cursor c = db.rawQuery(sql, null); //Get cursor over all exercises with the name we're trying to add.
 		
 		if(!c.moveToFirst()){ //Move to first entry, if true there's a duplicate meaning we don't wish to enter the if-statement. If false, it's a unique exercise and we insert into the database.
@@ -33,7 +33,7 @@ class StoreExercise {
 			values.put(DbHelper.C_DESCRIPTION, exercise.getDescription());
 
 			try{
-				db.insertOrThrow(DbHelper.TABLE, null, values);
+				db.insertOrThrow(DbHelper.TABLE_1, null, values);
 				c.close();
 				return true;
 			}

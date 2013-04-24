@@ -86,7 +86,7 @@ public class DatabaseController{
 	
 	public Cursor removeExercise(String exercise){
 		db = dbHelp.getWritableDatabase();
-		db.delete(DbHelper.TABLE, DbHelper.C_NAME + "=?", new String[] {exercise}); //Remove row where Name = exercise.
+		db.delete(DbHelper.TABLE_1, DbHelper.C_NAME + "=?", new String[] {exercise}); //Remove row where Name = exercise.
 		db.close();
 		return getExerciseCursor();
 	}
