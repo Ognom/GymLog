@@ -1,10 +1,12 @@
 package com.ognom.gymlog.database;
 
+import java.util.Date;
 import java.util.List;
 
 
 import com.ognom.gymlog.model.Exercise;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,6 +20,7 @@ public class DatabaseController{
 	private SQLiteDatabase db;
 	private StoreExercise se;
 	private ReadExercise re;
+	private ReadWorkout rw;
 	
 	
 	//Creates instances of all the other classes in this packet.
@@ -25,6 +28,7 @@ public class DatabaseController{
 		this.dbHelp = new DbHelper(context);
 		this.se = new StoreExercise();
 		this.re = new ReadExercise();
+		this.rw = new ReadWorkout();
 	}
 	
 	//Starts a new instance of DatabaseController if no earlier instance exists.
@@ -70,6 +74,30 @@ public class DatabaseController{
 	public Cursor getExerciseCursor(CharSequence s){
 		db = dbHelp.getReadableDatabase();
 		Cursor cursor = re.getExercisesCursor(db, s);
+		db.close();
+		return cursor;
+	}
+	
+	public boolean addWorkouts(){ //Dummy method used for testing
+		db = dbHelp.getReadableDatabase();
+		ContentValues values = new ContentValues();
+		Date d = new Date(2013, 4, 24, 12, 36);
+		values.put(DbHelper.C_DATE, d.toString());
+		db.insertOrThrow(DbHelper.TABLE2, null, values);
+		return true;
+		
+	}
+	
+	public Cursor getWorkoutCursor(CharSequence s){
+		db = dbHelp.getReadableDatabase();
+		Cursor cursor = rw.getWorkoutCursor(db, s);
+		db.close();
+		return cursor;
+	}
+	
+	public Cursor getWorkoutCursor(){
+		db = dbHelp.getReadableDatabase();
+		Cursor cursor = rw.getWorkoutCursor(db);
 		db.close();
 		return cursor;
 	}

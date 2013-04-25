@@ -113,7 +113,9 @@ public class ReviewWorkout extends Activity implements OnItemClickListener, OnCl
 	@Override
 	protected void onStart(){
 		dbC = DatabaseController.initialize(this);
-		cursor = dbC.getExerciseCursor();
+		cursor = dbC.getWorkoutCursor();
+		dbC.addWorkouts();
+		System.out.println("Value of workout: " + cursor.getString(1));
 		startManagingCursor(cursor); //TODO: Switch to cursorLoader
 
 		String[] from = new String[] {"Date"};
@@ -125,7 +127,7 @@ public class ReviewWorkout extends Activity implements OnItemClickListener, OnCl
 
 			@Override
 			public Cursor runQuery(CharSequence s) {
-				return dbC.getExerciseCursor(s);
+				return dbC.getWorkoutCursor(s);
 			}
 		});
 
