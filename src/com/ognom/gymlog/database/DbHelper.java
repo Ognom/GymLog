@@ -1,6 +1,8 @@
 package com.ognom.gymlog.database;
 
 
+import java.util.Date;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,12 +15,17 @@ class DbHelper extends SQLiteOpenHelper {
 
 	// Exercise variables
 	public static final String DB_NAME = "gymlog.db";
-	public static final int DB_VERSION = 21;
+	public static final int DB_VERSION = 1;
 	public static final String TABLE = "Exercises";
+	public static final String TABLE2 = "Workouts";
+	public static final String TABLE3 = "WorkoutData";
 	public static final String C_ID = BaseColumns._ID; // Special for id
 	public static final String C_NAME = "Name";
 	public static final String C_CATEGORY = "Category";
 	public static final String C_DESCRIPTION  = "Description";
+	public static final String C_DATE = "Date";
+	public static final String C_REPETITONS = "Repetitions";
+	public static final String C_WEIGHT = "Weight";
 
 	Context context;
 
@@ -39,21 +46,56 @@ class DbHelper extends SQLiteOpenHelper {
 				);
 
 		Log.d(TAG, "onCreate sql: \n"+sql_Exercise);
+		
+		String sql_Workout = String.format(
+				"create table %s(_id INTEGER PRIMARY KEY, " +
+								 "%s TEXT)",
+				TABLE2, C_DATE								 
+				);
+		
+		Log.d(TAG, "onCreate sql: \n"+sql_Workout);
+		
+		String sql_WorkoutData = String.format(
+				"create table %s(_id INTEGER PRIMARY KEY, " + 
+								 "%s TEXT, " +
+								 "%s TEXT, " +
+								 "%s TEXT, " +
+								 "%s TEXT, " +
+								 "FOREIGN KEY (%s) REFERENCES %s(%s) ON DELETE CASCADE, "  +
+								 "FOREIGN KEY (%s) REFERENCES %s(%s) ON DELETE CASCADE)",
+								 TABLE3, C_NAME, C_DATE, C_REPETITONS, C_WEIGHT,
+								 C_NAME, TABLE, C_NAME, //Foreign Key 1
+								 C_DATE, TABLE2, C_DATE); //Foreign Key 2
+		
+		Log.d(TAG, "onCreate sql: \n"+sql_WorkoutData);
 
 		//db = this.getWritableDatabase();
 		db.execSQL(sql_Exercise);
+		db.execSQL(sql_Workout);
+		db.execSQL(sql_WorkoutData);
+		
 		testExerciseStart(db);
+		testWorkoutsStart(db);
 	}
 
 	//Places an initial field in the exercise database.
 	public boolean testExerciseStart(SQLiteDatabase db){
 		System.out.println("testExerciseStart method executed");
 		ContentValues values = new ContentValues();
-		values.put("id", "null");
+		//values.put("id", "");
 		values.put(DbHelper.C_NAME, "Bänkpress");
 		values.put(DbHelper.C_CATEGORY, "Bröst");
 		values.put(DbHelper.C_DESCRIPTION, "Beefcake exercise");
 		db.insertOrThrow(DbHelper.TABLE, null, values);
+		return true;
+	}
+	
+	public boolean testWorkoutsStart(SQLiteDatabase db){
+		System.out.println("testWorkoutsStart method executed");
+		ContentValues values = new ContentValues();
+		Date d = new Date(2013, 4, 24, 12, 36);
+		values.put(DbHelper.C_DATE, d.toString());
+		db.insertOrThrow(DbHelper.TABLE2, null, values);
 		return true;
 	}
 
@@ -63,6 +105,12 @@ class DbHelper extends SQLiteOpenHelper {
 		// Typically you do ALTER TABLE... here
 		db.execSQL("drop table if exists " + TABLE);
 		Log.d(TAG, "onUpdate dropped table "+TABLE);
+		
+		db.execSQL("drop table if exists " + TABLE2);
+		Log.d(TAG, "onUpdate dropped table "+TABLE2);
+		
+		db.execSQL("drop table if exists " + TABLE3);
+		Log.d(TAG, "onUpdate dropped table "+TABLE3);
 		this.onCreate(db);
 	}
 

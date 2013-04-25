@@ -44,7 +44,7 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 	{
 		super.onCreate(savedInstanceState);
 		isWorkout = getIntent().getExtras().getBoolean("Workout"); //
-		setContentView(R.layout.review_exercise);
+		setContentView(R.layout.general_listview);
 		initialize();
 	}
 
@@ -134,7 +134,7 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 		startManagingCursor(cursor); //TODO: Switch to cursorLoader
 
 		String[] from = new String[] {"Name", "Description", "Category"};
-		int[] to = new int[] {R.id.row_name, R.id.row_description, R.id.row_category};
+		int[] to = new int[] {R.id.row_2, R.id.row_2, R.id.row_3};
 
 		adapter = new ExpandedCursorAdapter(this, R.layout.row, cursor, from, to, 0, filteredExercises);
 		filteredExercises.setAdapter(adapter);

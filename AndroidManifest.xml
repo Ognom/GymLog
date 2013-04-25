@@ -29,6 +29,11 @@
             android:label="@string/review_exercise" >
         </activity>
         
+        <activity
+            android:name=".ReviewWorkout"
+            android:label="@string/review_workout" >
+        </activity>
+        
         <activity 
             android:name=".SplashScreen" 
             android:noHistory="true"

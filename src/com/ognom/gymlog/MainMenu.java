@@ -12,40 +12,40 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 public class MainMenu extends Activity implements OnClickListener{
-	
+
 	Button newWorkout, reviewWorkout, newExercise, reviewExercise;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		
+
 		//Set to full screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
+
 		//Set the layout.
 		setContentView(R.layout.main_menu);
-		
+
 		//Initialize buttons and add onClickListeners.
 		initialize();
 
 	}
-	
+
 	private void initialize(){
-		
+
 		//Initialize buttons.
 		newWorkout = (Button) findViewById(R.id.bNewWorkout);
 		reviewWorkout = (Button) findViewById(R.id.bReviewWorkout);
 		newExercise = (Button) findViewById(R.id.bNewExercise);
 		reviewExercise = (Button) findViewById(R.id.bReviewExercise);
-		
+
 		//Add onClickListeners.
 		newWorkout.setOnClickListener(this);
 		reviewWorkout.setOnClickListener(this);
 		newExercise.setOnClickListener(this);
 		reviewExercise.setOnClickListener(this);
-		
+
 	}
 
 	@Override
@@ -91,9 +91,17 @@ public class MainMenu extends Activity implements OnClickListener{
 				e.printStackTrace();
 			}
 		case R.id.bReviewWorkout:
-			//TODO: Call desired class.
+			try{
+				Class<?> tempClass = Class.forName("com.ognom.gymlog.ReviewWorkout");
+				Intent tempIntent = new Intent(this, tempClass);
+				startActivity(tempIntent);
+				break;
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 		}
-		
+
 	}
 
 }
