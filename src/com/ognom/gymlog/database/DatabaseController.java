@@ -80,10 +80,8 @@ public class DatabaseController{
 	
 	public boolean addWorkouts(){ //Dummy method used for testing
 		db = dbHelp.getReadableDatabase();
-		ContentValues values = new ContentValues();
-		Date d = new Date(2013, 4, 24, 12, 36);
-		values.put(DbHelper.C_DATE, d.toString());
-		db.insertOrThrow(DbHelper.TABLE2, null, values);
+		dbHelp.testWorkoutsStart(db);
+		db.close();
 		return true;
 		
 	}

@@ -100,12 +100,12 @@ class DbHelper extends SQLiteOpenHelper {
 		
 		ContentValues values1 = new ContentValues();
 		Date d1 = new Date(2014, 4, 24, 12, 36);
-		values.put(DbHelper.C_DATE, d1.toString());
+		values1.put(DbHelper.C_DATE, d1.toString());
 		db.insertOrThrow(DbHelper.TABLE2, null, values1);
 		
 		ContentValues values2 = new ContentValues();
 		Date d2 = new Date(2015, 4, 24, 12, 36);
-		values.put(DbHelper.C_DATE, d2.toString());
+		values2.put(DbHelper.C_DATE, d2.toString());
 		db.insertOrThrow(DbHelper.TABLE2, null, values2);
 		
 		return true;
