@@ -2,6 +2,7 @@ package com.ognom.gymlog.database;
 
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -107,7 +108,8 @@ class DbHelper extends SQLiteOpenHelper {
 		System.out.println("testWorkoutsStart method executed");
 		
 		ContentValues values = new ContentValues();
-		Date d = new Date(2013, 4, 24, 12, 36);
+
+		Date d = new Date();
 		values.put(DbHelper.C_DATE, d.toString());
 		db.insertOrThrow(DbHelper.TABLE2, null, values);
 		
