@@ -82,8 +82,22 @@ public class DatabaseController{
 		db = dbHelp.getReadableDatabase();
 		dbHelp.testWorkoutsStart(db);
 		db.close();
-		return true;
+		return true;	
+	}
+	
+	public boolean addExercises(){ //Dummy method used for testing
+		db = dbHelp.getReadableDatabase();
 		
+		Exercise e1 = new Exercise("Bänkpress", "Bröst", "Beefcake exercise");
+		Exercise e2 = new Exercise("Marklyft", "Rygg", "Jobbigt som fan");
+		Exercise e3 = new Exercise("Knäböj", "Ben", "Parre pallar inte, hallöj");
+		
+		se.storeExercise(e1, db);
+		se.storeExercise(e2, db);
+		se.storeExercise(e3, db);
+				
+		db.close(); 
+		return true;	
 	}
 	
 	public Cursor getWorkoutCursor(CharSequence s){

@@ -52,12 +52,14 @@ public class ReviewWorkout extends Activity implements OnItemClickListener, OnCl
 		dbC.addWorkouts();
 		
 		workoutSearch = (EditText) findViewById(R.id.eTExerciseSearch);
+		workoutSearch.setHint("Search for a workout");
 
 		addWorkout = (Button) findViewById(R.id.bAddExercise);
 		addWorkout.setClickable(true);
 		addWorkout.setOnClickListener(this);
+		addWorkout.setText("Add workout");
 
-		filteredWorkouts = (ListView) findViewById(R.id.lVFilteredExercises);
+		filteredWorkouts = (ListView) findViewById(R.id.lVFilteredView);
 		filteredWorkouts.setFocusableInTouchMode(true);
 		filteredWorkouts.setOnItemClickListener(this);
 		filteredWorkouts.setTextFilterEnabled(true);

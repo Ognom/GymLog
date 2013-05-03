@@ -33,7 +33,7 @@ public class MainMenu extends Activity implements OnClickListener{
 	}
 
 	private void initialize(){
-
+ 
 		//Initialize buttons.
 		newWorkout = (Button) findViewById(R.id.bNewWorkout);
 		reviewWorkout = (Button) findViewById(R.id.bReviewWorkout);
@@ -72,7 +72,6 @@ public class MainMenu extends Activity implements OnClickListener{
 			try{
 				Class<?> tempClass = Class.forName("com.ognom.gymlog.ReviewExercise");
 				Intent tempIntent = new Intent(this, tempClass);
-				tempIntent.putExtra("Workout", false);
 				startActivity(tempIntent);
 				break;
 			}
@@ -83,7 +82,6 @@ public class MainMenu extends Activity implements OnClickListener{
 			try{
 				Class<?> tempClass = Class.forName("com.ognom.gymlog.ReviewExercise");
 				Intent tempIntent = new Intent(this, tempClass);
-				tempIntent.putExtra("Workout", true);
 				startActivity(tempIntent);
 				break;
 			}

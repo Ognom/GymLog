@@ -81,12 +81,25 @@ class DbHelper extends SQLiteOpenHelper {
 	//Places an initial field in the exercise database.
 	public boolean testExerciseStart(SQLiteDatabase db){
 		System.out.println("testExerciseStart method executed");
+		
 		ContentValues values = new ContentValues();
-		//values.put("id", "");
 		values.put(DbHelper.C_NAME, "Bänkpress");
 		values.put(DbHelper.C_CATEGORY, "Bröst");
 		values.put(DbHelper.C_DESCRIPTION, "Beefcake exercise");
 		db.insertOrThrow(DbHelper.TABLE, null, values);
+		
+		ContentValues values1 = new ContentValues();
+		values1.put(DbHelper.C_NAME, "Marklyft");
+		values1.put(DbHelper.C_CATEGORY, "Rygg");
+		values1.put(DbHelper.C_DESCRIPTION, "Jobbigt halloj");
+		db.insertOrThrow(DbHelper.TABLE, null, values1);
+		
+		ContentValues values2 = new ContentValues();
+		values2.put(DbHelper.C_NAME, "Knäböj");
+		values2.put(DbHelper.C_CATEGORY, "Ben");
+		values2.put(DbHelper.C_DESCRIPTION, "Parre bangar");
+		db.insertOrThrow(DbHelper.TABLE, null, values2);
+		
 		return true;
 	}
 	

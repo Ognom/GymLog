@@ -36,20 +36,20 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 	private SimpleCursorAdapter adapter;
 	private Button addExercise;
 	private GestureDetector gd;
-	private static boolean isWorkout; //Determines if the activity is called by Review Exercise or New Workout.
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		isWorkout = getIntent().getExtras().getBoolean("Workout"); //
 		setContentView(R.layout.general_listview);
 		initialize();
 	}
 
 	private void initialize(){
 
+		dbC = DatabaseController.initialize(this);
+		dbC.addExercises();
+		
 		//Begin declaring variables.
 		exerciseSearch = (EditText) findViewById(R.id.eTExerciseSearch);
 
@@ -57,13 +57,12 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 		addExercise.setClickable(true);
 		addExercise.setOnClickListener(this);
 
-		filteredExercises = (ListView) findViewById(R.id.lVFilteredExercises);
+		filteredExercises = (ListView) findViewById(R.id.lVFilteredView);
 		filteredExercises.setFocusableInTouchMode(true);
 		filteredExercises.setOnItemClickListener(this);
 		filteredExercises.setTextFilterEnabled(true);
 
 		//Add a custom GestureDetector located in the util package. Used when handling flings (swipes).
-		if(!isWorkout){ //Not necessary to add gestureDetector if parent activity is New Workout.
 		gd = new GestureDetector(this, new SwipeForDelete(filteredExercises));
 
 			filteredExercises.setOnTouchListener(new OnTouchListener() {
@@ -75,8 +74,7 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 				}
 			});
 		}
-	}
-
+	
 	//TODO: Low priority. Fancy graph method for fancy users.
 	private ProgressionGraph getGraph()
 	{
@@ -88,15 +86,10 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 	//Called when an item in the listView is clicked.
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
-		if(isWorkout){ //If New workout is the parent activity.
-			System.out.println("Clicked on an exercise from new workout");
-		}
-		else{ //If Review Exercise is the parent activity.
 			Cursor cursor = (Cursor) adapter.getItemAtPosition(position);
 			String exerciseName = cursor.getString(1);
 			System.out.println(exerciseName);
-			//TODO: Fetch a more detailed description of the selected exercise. Perhaps a new class and activity?
-		}
+			//TODO: Fetch a more detailed description of the selected exercise. Perhaps a new class and activity?		
 	}
 
 
@@ -129,12 +122,12 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 
 	@Override
 	protected void onStart(){
-		dbC = DatabaseController.initialize(this);
+
 		cursor = dbC.getExerciseCursor();
 		startManagingCursor(cursor); //TODO: Switch to cursorLoader
 
 		String[] from = new String[] {"Name", "Description", "Category"};
-		int[] to = new int[] {R.id.row_2, R.id.row_2, R.id.row_3};
+		int[] to = new int[] {R.id.row_1, R.id.row_2, R.id.row_3};
 
 		adapter = new ExpandedCursorAdapter(this, R.layout.row, cursor, from, to, 0, filteredExercises, true);
 		filteredExercises.setAdapter(adapter);
