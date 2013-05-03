@@ -48,6 +48,9 @@ public class ReviewWorkout extends Activity implements OnItemClickListener, OnCl
 	private void initialize(){
 
 		//Begin declaring variables.
+		dbC = DatabaseController.initialize(this);
+		dbC.addWorkouts();
+		
 		workoutSearch = (EditText) findViewById(R.id.eTExerciseSearch);
 
 		addWorkout = (Button) findViewById(R.id.bAddExercise);
@@ -112,16 +115,14 @@ public class ReviewWorkout extends Activity implements OnItemClickListener, OnCl
 
 	@Override
 	protected void onStart(){
-		dbC = DatabaseController.initialize(this);
 		cursor = dbC.getWorkoutCursor();
-		dbC.addWorkouts();
-		System.out.println("Value of workout: " + cursor.getString(1));
+		//System.out.println("Value of workout: " + cursor.getString(1));
 		startManagingCursor(cursor); //TODO: Switch to cursorLoader
 
 		String[] from = new String[] {"Date"};
 		int[] to = new int[] {R.id.row_1};
 
-		adapter = new ExpandedCursorAdapter(this, R.layout.row, cursor, from, to, 0, filteredWorkouts);
+		adapter = new ExpandedCursorAdapter(this, R.layout.row, cursor, from, to, 0, filteredWorkouts, false);
 		filteredWorkouts.setAdapter(adapter);
 		adapter.setFilterQueryProvider(new FilterQueryProvider() {
 
@@ -131,7 +132,7 @@ public class ReviewWorkout extends Activity implements OnItemClickListener, OnCl
 			}
 		});
 
-		workoutSearch.addTextChangedListener(new TextWatcher() {
+		workoutSearch.addTextChangedListener(new TextWatcher() { 
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {

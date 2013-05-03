@@ -136,7 +136,7 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 		String[] from = new String[] {"Name", "Description", "Category"};
 		int[] to = new int[] {R.id.row_2, R.id.row_2, R.id.row_3};
 
-		adapter = new ExpandedCursorAdapter(this, R.layout.row, cursor, from, to, 0, filteredExercises);
+		adapter = new ExpandedCursorAdapter(this, R.layout.row, cursor, from, to, 0, filteredExercises, true);
 		filteredExercises.setAdapter(adapter);
 		adapter.setFilterQueryProvider(new FilterQueryProvider() {
 

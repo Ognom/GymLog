@@ -116,6 +116,13 @@ public class DatabaseController{
 		db.close();
 		return getExerciseCursor();
 	}
+	
+	public Cursor removeWorkout(String date){
+		db = dbHelp.getWritableDatabase();
+		db.delete(DbHelper.TABLE2, DbHelper.C_DATE + "=?", new String[] {date}); //Remove row where Name = exercise.
+		db.close();
+		return getWorkoutCursor();
+	}
 
 }
 

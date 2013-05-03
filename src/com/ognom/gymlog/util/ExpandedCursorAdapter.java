@@ -22,11 +22,13 @@ public class ExpandedCursorAdapter extends SimpleCursorAdapter{
 	protected ListView listView;
 	protected static final String TAG = "ExpandedCursorAdapter";
 	private DatabaseController dbC;
+	private boolean isExercise;
 
-	public ExpandedCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags, ListView listview) {
+	public ExpandedCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags, ListView listview, boolean isExercise) {
 		super(context, layout, c, from, to, flags);
 		dbC = DatabaseController.initialize();
 		this.listView = listview;
+		this.isExercise = isExercise;
 	}
 
 	@Override
@@ -44,10 +46,13 @@ public class ExpandedCursorAdapter extends SimpleCursorAdapter{
 		public void onClick(View v) {
 			final int position = listView.getPositionForView((View) v.getParent());
 			Cursor c = (Cursor)listView.getItemAtPosition(position);
-			String exerciseName = c.getString(1);
-			c = dbC.removeExercise(exerciseName); //Remove the desired exercise and retrieve a new cursor.
-			Log.v(TAG, "Delete clicked, removing " + exerciseName + "from the Database");
-			changeCursor(c); //Update the listView using the new cursor.
+			String name = c.getString(1);
+			if(isExercise)
+				c = dbC.removeExercise(name); //Remove the desired exercise and retrieve a new cursor.
+			else
+				c = dbC.removeWorkout(name);
+			Log.v(TAG, "Delete clicked, removing " + name + "from the Database");
+			changeCursor(c); //Update the listView using the new cursor. 
 			SwipeForDelete.deletedExercise(); //Remove the delete button after deletion.
 		}
 	};
