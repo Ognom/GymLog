@@ -80,7 +80,7 @@ public class MainMenu extends Activity implements OnClickListener{
 			}
 		case R.id.bNewWorkout:
 			try{
-				Class<?> tempClass = Class.forName("com.ognom.gymlog.ReviewExercise");
+				Class<?> tempClass = Class.forName("com.ognom.gymlog.NewWorkout");
 				Intent tempIntent = new Intent(this, tempClass);
 				startActivity(tempIntent);
 				break;
