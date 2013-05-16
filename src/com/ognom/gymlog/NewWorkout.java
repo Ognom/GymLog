@@ -1,6 +1,8 @@
 package com.ognom.gymlog;
 
 
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -31,6 +33,7 @@ public class NewWorkout extends Activity implements OnItemClickListener, OnClick
 	private Cursor cursor;
 	private SimpleCursorAdapter adapter;
 	private Button addExercise;
+	private String workoutDate;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -56,6 +59,8 @@ public class NewWorkout extends Activity implements OnItemClickListener, OnClick
 		filteredExercises.setFocusableInTouchMode(true);
 		filteredExercises.setOnItemClickListener(this);
 		filteredExercises.setTextFilterEnabled(true);
+		
+		workoutDate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()); //Define the date used by this workout.
 
 	}
 

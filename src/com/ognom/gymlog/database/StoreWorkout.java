@@ -20,7 +20,7 @@ public class StoreWorkout {
 	}
 	
 	//TODO
-	private boolean storeWorkoutExercises(Exercise aExercise, SQLiteDatabase aDatabase)
+	private boolean storeWorkoutExercisee(Exercise aExercise, SQLiteDatabase aDatabase)
 	{
 		
 		return false;

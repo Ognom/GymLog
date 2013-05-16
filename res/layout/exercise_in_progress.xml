@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/tVRepetitions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/eTRepetitions"
+            android:layout_below="@+id/spMeasurement"
+            android:layout_marginTop="42dp"
+            android:text="@string/reps"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/eTWeight"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tVCurrentExercise"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="34dp"
+            android:ems="10"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/eTRepetitions"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/eTWeight"
+            android:layout_below="@+id/tVRepetitions"
+            android:ems="10"
+            android:inputType="numberDecimal" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/tVCurrentExercise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/tVRepetitions"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Spinner
+            android:id="@+id/spMeasurement"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@+id/eTWeight"
+            android:layout_marginLeft="22dp"
+            android:layout_toRightOf="@+id/eTWeight" />
+
+        <Button
+            android:id="@+id/bLog"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/tVCurrentExercise"
+            android:layout_below="@+id/tVRepetitions"
+            android:text="@string/log" />
+    </RelativeLayout>
+
+    <ListView
+        android:layout_marginTop="30dp"
+        android:id="@+id/lVLoggedSets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>
