@@ -83,7 +83,7 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 	}
 
 
-	//Called when an item in the listView is clicked.
+	//Called when an item in the listView is clicked. Passes the name of the exercise clicked as an intent extra and starts up a new activity, ExerciseInProgress.
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
 			Cursor cursor = (Cursor) adapter.getItemAtPosition(position);
