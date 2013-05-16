@@ -88,8 +88,16 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 	public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
 			Cursor cursor = (Cursor) adapter.getItemAtPosition(position);
 			String exerciseName = cursor.getString(1);
-			System.out.println(exerciseName);
-			//TODO: Fetch a more detailed description of the selected exercise. Perhaps a new class and activity?		
+			try{
+				Class<?> tempClass = Class.forName("com.ognom.gymlog.ExerciseInProgress");
+				Intent tempIntent = new Intent(this, tempClass);
+				tempIntent.putExtra("Exercise", exerciseName);
+				startActivity(tempIntent);
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+				
 	}
 
 

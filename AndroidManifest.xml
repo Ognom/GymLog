@@ -39,6 +39,11 @@
             android:label="@string/new_workout" >
         </activity>
         
+        <activity
+            android:name=".ExerciseInProgress"
+            android:label="@string/exercise_in_progress" >
+        </activity>
+        
         <activity 
             android:name=".SplashScreen" 
             android:noHistory="true"

@@ -17,5 +17,13 @@
     <string name="cartman_picture">A sweet picture of Cartman</string>
     <string name="reps">Repetitons</string>
     <string name="log">Log</string>
+    <string name="exercise_in_progress">Exercise in progress</string>
+    
+    <string-array name="measurements">
+        <item>kg</item>
+        <item>lbs</item>
+        <item>level</item>
+        <item>none</item>
+    </string-array>
 
 </resources>
