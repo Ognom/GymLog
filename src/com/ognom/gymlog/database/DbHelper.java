@@ -117,16 +117,6 @@ class DbHelper extends SQLiteOpenHelper {
 		values.put(DbHelper.C_DATE, mydate);
 		db.insertOrThrow(DbHelper.TABLE2, null, values);
 		
-		ContentValues values1 = new ContentValues();
-		Date d1 = new Date(2014, 4, 24, 12, 36);
-		values1.put(DbHelper.C_DATE, d1.toString());
-		db.insertOrThrow(DbHelper.TABLE2, null, values1);
-		
-		ContentValues values2 = new ContentValues();
-		Date d2 = new Date(2015, 4, 24, 12, 36);
-		values2.put(DbHelper.C_DATE, d2.toString());
-		db.insertOrThrow(DbHelper.TABLE2, null, values2);
-		
 		return true;
 	}
 

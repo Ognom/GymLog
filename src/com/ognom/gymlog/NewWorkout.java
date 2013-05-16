@@ -63,14 +63,24 @@ public class NewWorkout extends Activity implements OnItemClickListener, OnClick
 		workoutDate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()); //Define the date used by this workout.
 
 	}
-
-	//Called when an item in the listView is clicked.
+	
+	//Called when an item in the listView is clicked. Passes the name of the exercise clicked as an intent extra and starts up a new activity, ExerciseInProgress.
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
-			Cursor cursor = (Cursor) adapter.getItemAtPosition(position);
-			String exerciseName = cursor.getString(1);
-			System.out.println(exerciseName);
-			//TODO: If an exercise is clicked in New Workout, add the exercise to the workout and bring up a new screen showing desired weights, reps etc.		
+		Cursor cursor = (Cursor) adapter.getItemAtPosition(position);
+		String exerciseName = cursor.getString(1);
+		String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()); //A string representing a date
+		 																									 //in the form of May 7, 2013 9:26:03 AM 
+		try{
+			Class<?> tempClass = Class.forName("com.ognom.gymlog.ExerciseInProgress");
+			Intent tempIntent = new Intent(this, tempClass);
+			tempIntent.putExtra("Exercise", exerciseName);
+			tempIntent.putExtra("Date", mydate);
+			startActivity(tempIntent);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 

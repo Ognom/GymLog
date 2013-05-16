@@ -18,17 +18,21 @@ public class ExerciseInProgress extends Activity implements OnClickListener{
 	TextView exerciseName;
 	ListView loggedExercises;
 	Spinner measurement;
+	String name, date;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.exercise_in_progress);
-		initialize(this.getIntent().getStringExtra("Exercise")); //Passes the exercise name to initialize.
+		initialize(); //Passes the exercise name to initialize.
 		//TODO: Make sure that the intent used to start this activity passes the exercise name.
 	}
 	
-	private void initialize(String Name){
+	private void initialize(){
+		name = this.getIntent().getStringExtra("Exercise");
+		date = this.getIntent().getStringExtra("Date");
+		
 		log = (Button) findViewById(R.id.bLog);
 		log.setOnClickListener(this);
 		
@@ -36,7 +40,7 @@ public class ExerciseInProgress extends Activity implements OnClickListener{
 		weight = (EditText) findViewById(R.id.eTWeight);
 		
 		exerciseName = (TextView) findViewById(R.id.tVCurrentExercise);
-		exerciseName.setText(Name);
+		exerciseName.setText(name);
 		
 		measurement = (Spinner) findViewById(R.id.spMeasurement);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

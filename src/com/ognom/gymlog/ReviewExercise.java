@@ -83,20 +83,13 @@ public class ReviewExercise extends Activity implements OnItemClickListener, OnC
 	}
 
 
-	//Called when an item in the listView is clicked. Passes the name of the exercise clicked as an intent extra and starts up a new activity, ExerciseInProgress.
+	//Called when an item in the listView is clicked.
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
 			Cursor cursor = (Cursor) adapter.getItemAtPosition(position);
 			String exerciseName = cursor.getString(1);
-			try{
-				Class<?> tempClass = Class.forName("com.ognom.gymlog.ExerciseInProgress");
-				Intent tempIntent = new Intent(this, tempClass);
-				tempIntent.putExtra("Exercise", exerciseName);
-				startActivity(tempIntent);
-			}
-			catch(Exception e){
-				e.printStackTrace();
-			}
+			System.out.println(exerciseName);
+			//TODO: If an exercise is clicked, show a more detailed activity with stats etc.
 				
 	}
 
