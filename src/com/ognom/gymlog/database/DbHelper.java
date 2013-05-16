@@ -113,7 +113,7 @@ class DbHelper extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 
 		String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()); //A string representing a date
-																																		  //in the form of May 7, 2013 9:26:03 AM 
+																											 //in the form of May 7, 2013 9:26:03 AM 
 		values.put(DbHelper.C_DATE, mydate);
 		db.insertOrThrow(DbHelper.TABLE2, null, values);
 		
